@@ -39,7 +39,7 @@ Then a second reader: spawn the `aso-kit:aso-verifier` agent with the locale, th
 
 ## 3. Write `aso/metadata-<locale>.md`
 
-Short and paste-ready:
+Short and paste-ready, at most 60 lines: inside `<details>` each paragraph or bullet is one line, with no blank lines between them; `## Why` at most 3 bullets.
 
 ```markdown
 > aso-metadata · <locale> · YYYY-MM-DD · check.mjs clean · rubric <n>/<items that apply>
