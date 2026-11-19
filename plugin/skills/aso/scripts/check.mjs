@@ -32,6 +32,31 @@ function limit(locale, store, field, value) {
   const n = spec.unit === "bytes" ? bytes(value) : chars(value);
   if (n > spec.max) add("error", locale, `${store}.${field}`, `${n}/${spec.max} ${spec.unit}`);
   if (spec.min && n < spec.min) add("error", locale, `${store}.${field}`, `shorter than ${spec.min}`);
+  if (spec.fill && n < spec.max * spec.fill) add("warn", locale, `${store}.${field}`, `${n}/${spec.max} ${spec.unit} — indexed space left unused`);
+}
+
+// Events, IAPs, product pages, tags, promo content: arrays of items, each item's fields graded on their own.
+function lists(locale, store, f, lang) {
+  for (const [key, spec] of Object.entries(L.lists)) {
+    const [s, name] = key.split(".");
+    const items = f[name];
+    if (s !== store || items == null) continue;
+    if (spec.maxItems && items.length > spec.maxItems) add("error", locale, key, `${items.length} items, max ${spec.maxItems}`);
+    items.forEach((item, i) => {
+      for (const [field, fs] of Object.entries(spec.fields ?? { "": {} })) {
+        const v = field ? item[field] : item;
+        if (typeof v !== "string") continue;
+        const at = `${key}[${i}]${field && `.${field}`}`;
+        const n = chars(v);
+        if (fs.max && n > fs.max) {
+          const why = fs.disputed ? ` (Apple also states ${fs.disputed[1]}; the stricter limit is used)` : "";
+          add(fs.source === "practitioner" ? "warn" : "error", locale, at, `${n}/${fs.max} chars${why}${fs.source ? ` — ${fs.source} figure` : ""}`);
+        }
+        if (store === "ios") banned(locale, at, v, L.banned.iosAll);
+        common(locale, at, v, lang);
+      }
+    });
+  }
 }
 
 function banned(locale, key, text, list) {
@@ -50,6 +75,7 @@ function ios(locale, f, lang) {
     banned(locale, `ios.${k}`, v, L.banned.iosAll);
     common(locale, `ios.${k}`, v, lang);
   }
+  lists(locale, "ios", f, lang);
   const name = new Set(words(f.name ?? ""));
   const shared = words(f.subtitle ?? "").filter((w) => name.has(w) && w.length > 2);
   if (shared.length) add("warn", locale, "ios.subtitle", `repeats name words: ${[...new Set(shared)].join(", ")}`);
@@ -90,6 +116,7 @@ function play(locale, f, lang, primary) {
     if (caps.length) add("warn", locale, `play.${k}`, `ALL CAPS: ${caps.join(", ")}`);
   }
   for (const [k, v] of Object.entries(f)) if (typeof v === "string") common(locale, `play.${k}`, v, lang);
+  lists(locale, "play", f, lang);
 
   const full = f.fullDescription;
   if (full == null) return;

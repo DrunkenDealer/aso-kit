@@ -1,16 +1,16 @@
 {
   "verified": "2026-11-19",
   "ios": {
-    "name": { "max": 30, "min": 2, "unit": "chars", "indexed": true },
-    "subtitle": { "max": 30, "unit": "chars", "indexed": true },
+    "name": { "max": 30, "min": 2, "unit": "chars", "indexed": true, "fill": 0.9 },
+    "subtitle": { "max": 30, "unit": "chars", "indexed": true, "fill": 0.9 },
     "keywords": { "max": 100, "unit": "bytes", "indexed": true, "minTerm": 3, "fillTarget": 90 },
     "promotionalText": { "max": 170, "unit": "chars", "indexed": false },
     "description": { "max": 4000, "unit": "chars", "indexed": false },
     "whatsNew": { "max": 4000, "unit": "chars", "indexed": false }
   },
   "play": {
-    "title": { "max": 30, "unit": "chars", "indexed": true },
-    "shortDescription": { "max": 80, "unit": "chars", "indexed": "disputed" },
+    "title": { "max": 30, "unit": "chars", "indexed": true, "fill": 0.9 },
+    "shortDescription": { "max": 80, "unit": "chars", "indexed": "disputed", "fill": 0.9 },
     "fullDescription": {
       "max": 4000,
       "unit": "chars",

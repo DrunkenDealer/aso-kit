@@ -54,7 +54,9 @@ Copy is keyed by **locale** (`en-US`, `de-DE`, `pt-BR`); store calls by **storef
 }
 ```
 
-A store the app isn't on is omitted. A field left out is not graded. `competitors` are the names `check.mjs` must never see in the copy.
+Optional lists, graded item by item when present: `ios.events` `[{name, short, long}]`, `ios.iaps` `[{name, description}]`, `ios.customProductPages` `[{promotionalText}]`, `play.tags` `["…"]`, `play.promotionalContent` `[{title, description}]`.
+
+A store the app isn't on is omitted. A field left out is not graded. Name, subtitle, Play title and short description warn below 90% of their limit: indexed space left empty is ranking left unclaimed. `competitors` are the names `check.mjs` must never see in the copy.
 
 ## State block
 

@@ -8,11 +8,15 @@
       "ios": {
         "name": "Habitly: Best Habit Tracker for iPhone and Android",
         "subtitle": "Habit Tracker",
-        "keywords": "habit, tracker,app,streaks,streak,free,goals,goal,to,Streaks"
+        "keywords": "habit, tracker,app,streaks,streak,free,goals,goal,to,Streaks",
+        "events": [{ "name": "The Ultimate 30-Day Habit Challenge", "short": "Join now" }],
+        "iaps": [{ "name": "Habitly Premium Lifetime Unlock", "description": "Everything" }]
       },
       "play": {
         "title": "Habitly #1 FREE Habit Tracker 🔥",
         "shortDescription": "Best habit tracker!! Download now",
+        "tags": ["Habits", "Goals", "Routine", "Planner", "Journal", "Health"],
+        "promotionalContent": [{ "title": "Streaks-style challenge", "description": "x" }],
         "fullDescription": "Best habit tracker!! Download now\nhabit tracker, habit app, tracker, daily habits, routine, goals, streaks, planner\nhabit tracker habit tracker habit tracker habit tracker habit tracker habit tracker"
       }
     },

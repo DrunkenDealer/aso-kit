@@ -36,6 +36,11 @@ test("a stuffed listing fails on every rule it breaks", () => {
     "error en-US play.shortDescription: repeated punctuation",
     "error en-US play.fullDescription: repeats the short description",
     'error de-DE ios.subtitle: banned "kostenlos"',
+    "warn de-DE ios.name: 7/30 chars — indexed space left unused",
+    "error en-US ios.events[0].name: 35/30 chars",
+    "error en-US ios.iaps[0].name: 31/30 chars (Apple also states 35; the stricter limit is used)",
+    "error en-US play.tags: 6 items, max 5",
+    'error en-US play.promotionalContent[0].title: competitor name "Streaks"',
   ])
     assert.ok(m.includes(want), `missing: ${want}`);
   assert.ok(m.some((x) => x.startsWith("error en-US play.fullDescription: keyword list")));
