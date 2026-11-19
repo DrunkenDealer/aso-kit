@@ -18,6 +18,14 @@ One folder, `aso/`, at the project root. No dates in file names; each file opens
 | `aso/screenshot-brief.md` | `/aso-metadata`, on request | the slide brief — format in `screenshot-brief.md` |
 | `aso/audit.md` | `/aso-audit` | scorecard, findings, measurement plan |
 
+Line budgets — short is the point; `node ../aso/scripts/check.mjs aso/` flags a file over its budget:
+
+| File | Lines |
+|---|---|
+| `context.md`, `audit.md`, `screenshot-brief.md` | 50 |
+| `keywords-<locale>.md` | 40 |
+| `metadata-<locale>.md` | 60 |
+
 First line of every md file:
 
 ```

@@ -66,3 +66,13 @@ test("a keyword plan fails on sources, competitors and the packed field", () => 
   ])
     assert.ok(m.includes(want), `missing: ${want}`);
 });
+
+test("line budgets flag an overlong output file", async () => {
+  const { mkdtempSync, writeFileSync } = await import("node:fs");
+  const { tmpdir } = await import("node:os");
+  const dir = mkdtempSync(join(tmpdir(), "aso-"));
+  writeFileSync(join(dir, "keywords-de-DE.md"), "x\n".repeat(41));
+  writeFileSync(join(dir, "context.md"), "x\n".repeat(10));
+  const r = spawnSync("node", [join(here, "../plugin/skills/aso/scripts/check.mjs"), dir], { encoding: "utf8" });
+  assert.equal(r.stdout.trim(), "! keywords-de-DE.md: 41/40 lines");
+});

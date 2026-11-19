@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Grades a metadata.json, or a keywords-<locale>.md plan, against store limits and policy in ../knowledge/limits.json.
 //   node check.mjs <metadata.json | keywords-<locale>.md> [--json]
+//   node check.mjs aso/ — line budgets of the md outputs (conventions.md)
 // Exit 0 clean or warnings only, 1 on any error, 2 on bad input.
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -11,6 +12,17 @@ const [file, flag] = process.argv.slice(2);
 if (!file) {
   console.error("usage: check.mjs <metadata.json | keywords-<locale>.md> [--json]");
   process.exit(2);
+}
+if (statSync(file).isDirectory()) {
+  const BUDGET = { context: 50, keywords: 40, metadata: 60, audit: 50, "screenshot-brief": 50 };
+  let over = 0;
+  for (const f of readdirSync(file).filter((f) => f.endsWith(".md"))) {
+    const max = BUDGET[f.replace(/-[a-z]{2}(-[A-Za-z]+)?\.md$|\.md$/, "")];
+    const n = readFileSync(join(file, f), "utf8").trimEnd().split("\n").length;
+    if (max && n > max) over++, console.log(`! ${f}: ${n}/${max} lines`);
+  }
+  if (!over) console.log("✓ every file within its line budget");
+  process.exit(0);
 }
 const sibling = (name) => join(dirname(file), name);
 const plan = file.endsWith(".md") ? readFileSync(file, "utf8") : null;
