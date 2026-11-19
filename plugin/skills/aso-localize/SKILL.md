@@ -3,7 +3,7 @@ name: aso-localize
 description: Adds one App Store / Google Play locale after the English listing is live and measured — fresh keyword research in that market's language (keywords don't translate), copy checked for the same meaning as English, App Store cross-localization, a native-speaker review gate. A separate step, never part of the default flow; warns before a first or a parallel localization. Triggers on "localize my app listing", "ASO for Ukraine", "add Japanese App Store keywords", "listing in Hindi", "cross-localization".
 user-invocable: true
 argument-hint: "<one locale>  e.g. de-DE, uk, ja, hi, ar-SA"
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, AskUserQuestion
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, Agent, AskUserQuestion
 ---
 
 # ASO localize

@@ -1,6 +1,6 @@
 ---
 name: aso-keywords
-description: Builds a scored keyword set for one locale on the App Store and Google Play — seeds from the app, live autocomplete from both stores, competitor title and subtitle patterns, relevance-gated opportunity scores, and the packed iOS 100-byte keyword field. Triggers on "keyword research", "ASO keywords", "find keywords for my app", "fill my App Store keyword field".
+description: Builds a scored keyword set for one locale on the App Store and Google Play — seeds from the app, live autocomplete from both stores, competitor title and subtitle patterns, relevance-gated opportunity scores, and the packed iOS 100-character keyword field. Triggers on "keyword research", "ASO keywords", "find keywords for my app", "fill my App Store keyword field".
 user-invocable: true
 argument-hint: "[locale, default the primary one]"
 allowed-tools: Read, Write, Glob, Grep, Bash, WebFetch, AskUserQuestion
