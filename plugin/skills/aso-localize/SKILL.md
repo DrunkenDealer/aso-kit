@@ -25,7 +25,7 @@ Say which job this locale has, and for a slot which storefronts it reaches.
 
 1. Run `/aso-keywords <locale>` with the Skill tool. Seeds come from that market's language and its own competitors — never a translation of the primary list.
 2. For a cross-localization slot, its keyword field must not repeat a word from the default locale's name, subtitle or keywords in the same storefront: those are already indexed there.
-3. Run `/aso-metadata <locale>`. It grades with `check.mjs`, which applies the locale's banned words (`limits.json` → `banned.locale`).
+3. Run `/aso-metadata <locale>`. It grades with `check.mjs`, which applies the locale's banned words (`limits.json` → `banned.locale`), then with `aso-verifier`; for a slot, tell it so, so rubric item 10 applies.
 
 Market notes worth checking:
 

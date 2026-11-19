@@ -3,7 +3,7 @@ name: aso-metadata
 description: Writes the App Store and Google Play text for one locale — app name, subtitle, keyword field, promotional text, description, What's New; Play title, short and full description, release notes — from a scored keyword set, graded by a checker against store limits and policy until it passes. Optionally writes a screenshot brief for /vitrine-deck. Triggers on "write my app store description", "optimize my title and subtitle", "store listing copy", "ASO metadata", "short description for Google Play".
 user-invocable: true
 argument-hint: "[locale, default the primary one]"
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, AskUserQuestion
+allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, Agent, AskUserQuestion
 ---
 
 # ASO metadata
@@ -33,12 +33,14 @@ node ../aso/scripts/check.mjs aso/metadata.json
 
 Fix every `✗` and run again until exit 0. Fix a `!` or say in the md why it stays. Never paste copy that fails.
 
+Then a second reader: spawn the `aso-kit:aso-verifier` agent with the locale, this skill's `../aso` path and the `aso/` folder. Fix each FAIL, re-run `check.mjs`, verify again — two rounds at most. A FAIL still standing goes in the md under `## Open` with its quote; it is never dropped silently. Without the Agent tool, walk `../aso/references/rubric.md` yourself and say so in the md.
+
 ## 3. Write `aso/metadata-<locale>.md`
 
 Short and paste-ready:
 
 ```markdown
-> aso-metadata · <locale> · YYYY-MM-DD · check.mjs clean
+> aso-metadata · <locale> · YYYY-MM-DD · check.mjs clean · rubric <n>/10
 
 # Metadata — <locale>
 
@@ -72,7 +74,7 @@ Promotional text, other variants: launch — … · time-bound — …
 
 If `fastlane/metadata/` exists, offer to write the fields there (gate 3).
 
-Update the state line `Metadata`.
+Run `node ../aso/scripts/check.mjs aso/` and trim any file over its line budget. Update the state line `Metadata`.
 
 ## 4. Screenshot brief — only if wanted
 
@@ -83,7 +85,7 @@ For vitrine-deck, invoke `vitrine-deck:vitrine-deck` with the Skill tool and no 
 ## Console
 
 ```
-aso-metadata · <locale> · check.mjs clean · name "<name>" · <n> warnings kept
+aso-metadata · <locale> · check.mjs clean · rubric <n>/10 · name "<name>" <n>/30 · <n> warnings kept
 → aso/metadata-<locale>.md
 ```
 

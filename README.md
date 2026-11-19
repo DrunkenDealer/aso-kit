@@ -46,8 +46,12 @@ The brief works for any designer too.
 - [`knowledge/`](plugin/skills/aso/knowledge) — field limits, indexing, ranking, policy, keyword method, copy,
   localization, store endpoints, myths, a changelog of store changes. Verified 2026-11-19.
 - [`scripts/check.mjs`](plugin/skills/aso/scripts/check.mjs) — grades a `metadata.json` for limits (keyword field in
-  bytes), banned words per store and language, competitor names, keyword-field waste, Play title rules, description
-  density. `node check.mjs aso/metadata.json`
+  bytes), unfilled indexed space, banned words per store and language, competitor names, keyword-field waste, Play
+  title rules, description density, and events, IAPs, product pages, tags and promo content; grades a keyword plan
+  for sources and packing; checks line budgets. `node check.mjs aso/metadata.json`
+- [`agents/aso-verifier`](plugin/agents/aso-verifier.md) — a second reader on Haiku: grades the copy against a
+  10-item [rubric](plugin/skills/aso/references/rubric.md) (plan applied, true claims, native language, policy
+  tone) with a quote per verdict, after the checker passes.
 - [`scripts/store.mjs`](plugin/skills/aso/scripts/store.mjs) — autocomplete, search, lookup and charts from both
   stores' public endpoints. `node store.mjs probe` checks they still work.
 - [`scripts/drift.mjs`](plugin/skills/aso/scripts/drift.mjs) — fails when a fact lacks a source or a date, is older
