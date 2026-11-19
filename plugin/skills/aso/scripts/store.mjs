@@ -4,10 +4,11 @@
 //   store.mjs search  ios|play <term> [--cc us] [--lang en] [--limit 25]
 //   store.mjs lookup  ios <id|bundleId> | play <package> [--cc us] [--lang en]
 //   store.mjs top     ios [genreId] [--chart free|paid|grossing] | play <CATEGORY> [--cc us] [--limit 25]
+//   store.mjs match   ios|play <term a> <term b> [--cc us] [--lang en] — does the store treat two spellings as one word?
 //   store.mjs probe   — exercises every call; exit 1 if any fails
 const [cmd, store, ...rest] = process.argv.slice(2);
 const flags = Object.fromEntries(rest.flatMap((a, i) => (a.startsWith("--") ? [[a.slice(2), rest[i + 1]]] : [])));
-const arg = rest.find((a, i) => !a.startsWith("--") && !rest[i - 1]?.startsWith("--"));
+const [arg, arg2] = rest.filter((a, i) => !a.startsWith("--") && !rest[i - 1]?.startsWith("--"));
 const cc = (flags.cc ?? "us").toLowerCase();
 const lang = flags.lang ?? "en";
 const limit = Number(flags.limit ?? 25);
@@ -102,6 +103,15 @@ const play = {
   },
 };
 
+// Overlap of the two top-25 result sets: a store that folds the spellings returns near-identical lists.
+async function match(api, a, b) {
+  const [x, y] = await Promise.all([api.search(a), api.search(b)]).then((rs) => rs.map((r) => r.map((app) => app.id)));
+  const share = (n) => x.slice(0, n).filter((id) => y.slice(0, n).includes(id)).length / Math.max(1, Math.min(n, x.length, y.length));
+  const overlap = share(25);
+  return { a, b, results: [x.length, y.length], overlap: +overlap.toFixed(2), top10: +share(10).toFixed(2),
+    verdict: overlap >= 0.7 ? "same" : overlap <= 0.3 ? "different" : "partial" };
+}
+
 async function probe() {
   const checks = [
     ["ios suggest", () => ios.suggest("habit"), (r) => r.length > 0],
@@ -112,6 +122,7 @@ async function probe() {
     ["play search", () => play.search("habit tracker"), (r) => r.length > 0],
     ["play lookup", () => play.lookup("com.duolingo"), (r) => r.title && r.shortDescription && r.fullDescription],
     ["play top", () => play.top("HEALTH_AND_FITNESS"), (r) => r.length > 0],
+    ["ios match", () => match(ios, "habit tracker", "habit tracker"), (r) => r.verdict === "same"],
   ];
   let failed = 0;
   for (const [name, run, ok] of checks) {
@@ -123,6 +134,14 @@ async function probe() {
 }
 
 if (cmd === "probe") await probe();
+else if (cmd === "match") {
+  const api = { ios, play }[store];
+  if (!api || !arg || !arg2) {
+    console.error("usage: store.mjs match ios|play <term a> <term b> [--cc us] [--lang en]");
+    process.exit(2);
+  }
+  console.log(JSON.stringify(await match(api, arg, arg2), null, 2));
+}
 else {
   const api = { ios, play }[store];
   if (!api?.[cmd] || (cmd !== "top" && !arg)) {

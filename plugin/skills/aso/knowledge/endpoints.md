@@ -18,6 +18,7 @@ GET https://itunes.apple.com/lookup?bundleId=<bundle>&country=<cc>
 GET https://itunes.apple.com/search?term=<q>&entity=software&country=<cc>&limit=50
 ```
 - Works; caps at ~200 results. [probe](https://itunes.apple.com/search?term=habit+tracker&entity=software&country=us&limit=3) · 2026-11-19
+- `store.mjs match` compares the top 25 for two spellings. Identical queries score 0.9–1.0 on both stores and unrelated terms 0, so ≥ 0.7 reads as "folded" and ≤ 0.3 as "different". On iOS this is the Search API's engine, a proxy for in-app search, not the same thing. [probe](https://itunes.apple.com/search?term=habit+tracker&entity=software&country=us&limit=25) · 2026-11-19
 
 **Search hints (autocomplete)** — needs the storefront header, or it returns an empty list.
 ```
