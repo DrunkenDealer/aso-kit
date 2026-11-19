@@ -45,6 +45,8 @@ Score each row ✓ / ! / ✗. No 0–100 total — a weighted score implies fiel
 
 ## 3. Write `aso/audit.md`
 
+At most 50 lines; `node ../aso/scripts/check.mjs aso/` must report it within budget.
+
 ```markdown
 > aso-audit · <locale> · YYYY-MM-DD · <live | draft>
 
