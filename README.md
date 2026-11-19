@@ -71,5 +71,9 @@ Claude Code and Node.js 18+.
 ```sh
 node --test evals/check.test.mjs          # checker against good and bad fixtures
 node plugin/skills/aso/scripts/drift.mjs  # knowledge-base lint
-claude plugin eval plugin                 # trigger evals
+claude plugin eval plugin --tag trigger   # does each skill fire, and stay quiet off-topic
+claude plugin eval plugin --tag quality --scaffold   # full runs on a fixture app, graded by regex and an LLM judge
 ```
+
+Quality cases stage `plugin/evals/apps/habitly` (a pre-launch app) or overlay `habitly-live` (en-US live and
+measured) and run a skill end to end; each costs about $0.50–1.50 a run.
