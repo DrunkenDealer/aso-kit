@@ -1,0 +1,23 @@
+{
+  "app": "Habitly",
+  "brand": "Habitly",
+  "competitors": ["Streaks"],
+  "locales": {
+    "en-US": {
+      "primaryKeyword": "habit tracker",
+      "ios": {
+        "name": "Habitly: Best Habit Tracker for iPhone and Android",
+        "subtitle": "Habit Tracker",
+        "keywords": "habit, tracker,app,streaks,streak,free,goals,goal,to,Streaks"
+      },
+      "play": {
+        "title": "Habitly #1 FREE Habit Tracker 🔥",
+        "shortDescription": "Best habit tracker!! Download now",
+        "fullDescription": "Best habit tracker!! Download now\nhabit tracker, habit app, tracker, daily habits, routine, goals, streaks, planner\nhabit tracker habit tracker habit tracker habit tracker habit tracker habit tracker"
+      }
+    },
+    "de-DE": {
+      "ios": { "name": "Habitly", "subtitle": "Kostenlos Gewohnheiten", "keywords": "gewohnheit,routine" }
+    }
+  }
+}
