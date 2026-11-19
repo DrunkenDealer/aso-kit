@@ -60,7 +60,7 @@
 
 - Tests icon, screenshots, previews only — **no text fields**. Up to 3 treatments, one test at a time, up to 90 days; Apple suggests 90% confidence. [official](https://developer.apple.com/app-store/product-page-optimization/) · 2026-11-19
 - Creative assets (header, search-result visual) are testable per What's New; the PPO page doesn't list them yet. [official](https://developer.apple.com/app-store/whats-new/) · 2026-11-19
-- Text changes can only be measured before/after: one change per release, equal-length windows, ~4 weeks to settle. See `ranking.md`.
+Text changes can only be measured before/after: one change per release, equal-length windows, ~4 weeks to settle (`ranking.md`).
 
 ## In-App Events
 
