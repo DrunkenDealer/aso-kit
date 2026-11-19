@@ -92,7 +92,7 @@ A skill prints exactly this; the detail lives in the file.
 → <path>
 ```
 
-The headline is the single most decision-relevant fact — a count, a score, a blocker. Run standalone, a skill may add one line naming what naturally follows.
+The headline is the single most decision-relevant fact — a count, a score, a blocker. Skills that write copy add the fill of each indexed field (`name 28/30`), since unused indexed space is the most common waste. Run standalone, a skill may add one line naming what naturally follows.
 
 ## Gates
 

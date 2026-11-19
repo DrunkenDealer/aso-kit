@@ -8,7 +8,7 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, Agent, AskUserQuestio
 
 # ASO metadata
 
-Writes `aso/metadata.json` (this locale's entry), `aso/metadata-<locale>.md`, and on request `aso/screenshot-brief.md`. How to write each field: `../aso/knowledge/copy.md`. What gets rejected: `../aso/knowledge/policy.md`. Paths, gates, console: `../aso/references/conventions.md`. Bare knowledge file names (`copy.md`, `limits.json`…) are in `../aso/knowledge/`.
+Writes `aso/metadata.json` (this locale's entry), `aso/metadata-<locale>.md`, and on request `aso/screenshot-brief.md`. How to write each field: `../aso/knowledge/copy.md`. What gets rejected: `../aso/knowledge/policy.md`. How to fit more into each character: `../aso/knowledge/length-and-packing.md`. Paths, gates, console: `../aso/references/conventions.md`. Bare knowledge file names (`copy.md`, `limits.json`…) are in `../aso/knowledge/`.
 
 Needs `aso/keywords-<locale>.md`. Without it, offer `/aso-keywords` first; if declined, work from the repo and say the copy isn't keyword-targeted.
 
@@ -18,6 +18,8 @@ Only for the stores the app is on (or will be).
 
 1. **Name / title** — 2–3 variants of `Brand: Head Phrase` (`copy.md`), pick one. iOS name and Play title may differ.
 2. **iOS subtitle, Play short description** — 2–3 variants each, pick one.
+
+   Fit the 30-character fields to the limit, not under it: write each variant, count it (`node -e 'console.log([...process.argv[1]].length)' "<text>"`), and if it is under 27, add the next target term that reads naturally; if over, apply the packing guidance in `length-and-packing.md` (`:` over ` - `, `&` over `and`, the shorter of two synonyms) before dropping a term. Show each variant with its count, e.g. `Habitly: Habit Tracker & Diary (30/30)`.
 3. **iOS keyword field** — take the packed field from the keywords file. Don't rebuild it; if a term now repeats the name or subtitle, swap in one from the reserve.
 4. **Description** — one text, adapted per store: the positioning sentence first, value paragraph, feature bullets using the feature names from `aso/context.md`. On Play the head term 3–5 times in natural sentences, in the first three sentences; never a keyword list.
 5. **iOS promotional text** — three variants: evergreen, launch, time-bound. Not indexed; it's for conversion and can change without a release.
@@ -85,7 +87,7 @@ For vitrine-deck, invoke `vitrine-deck:vitrine-deck` with the Skill tool and no 
 ## Console
 
 ```
-aso-metadata · <locale> · check.mjs clean · rubric <n>/10 · name "<name>" <n>/30 · <n> warnings kept
+aso-metadata · <locale> · check.mjs clean · rubric <n>/10 · fill name <n>/30, subtitle <n>/30, field <n>/100 · <n> warnings kept
 → aso/metadata-<locale>.md
 ```
 

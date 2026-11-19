@@ -27,12 +27,14 @@ Say which job this locale has, and for a slot which storefronts it reaches.
 2. For a cross-localization slot, its keyword field must not repeat a word from the default locale's name, subtitle or keywords in the same storefront: those are already indexed there.
 3. Run `/aso-metadata <locale>`. It grades with `check.mjs`, which applies the locale's banned words (`limits.json` → `banned.locale`), then with `aso-verifier`; for a slot, tell it so, so rubric item 10 applies.
 
+The copy is written fresh in the locale's language to its own limits — never the English copy translated and trimmed. A 30-character English field grows 60–80% in most European languages, and German fills the subtitle hardest (`length-and-packing.md`). Where two local words mean the same, take the one autocomplete shows, then the shorter.
+
 Market notes worth checking:
 
-- **de** — compounds index as one word (`Gewohnheitstracker` ≠ `Gewohnheit Tracker`); check both in suggest.
+- **de, nl** — compounds partly match their split form; use the compound in the name and add the head noun alone to the keyword field. `ue` for `ü` is a different query.
 - **pt-BR vs pt-PT, es-MX vs es-ES** — separate vocabularies; on iOS separate storefronts.
-- **ja, ko, zh** — no spaces between words; the keyword field counts characters, so one CJK character costs 1 (`ios-metadata.md`).
-- **Plurals** — outside English Apple may not fold them (`ios-metadata.md`); keep the form the suggestions show.
+- **ja, ko, zh** — no spaces between words; the keyword field counts characters, so one CJK character costs 1 and the field holds about twice as many terms. Kana and kanji fold; romaji doesn't on Play.
+- **Plurals** — outside English both stores treat them as separate queries (`length-and-packing.md`); put the suggested form in name or subtitle and the other in the keyword field if it fits.
 
 ## 3. Native review gate
 
