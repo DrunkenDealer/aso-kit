@@ -1,0 +1,22 @@
+{
+  "app": "Habitly",
+  "brand": "Habitly",
+  "developer": "Northwind Labs",
+  "competitors": ["Streaks", "Habitify"],
+  "locales": {
+    "en-US": {
+      "primaryKeyword": "habit tracker",
+      "ios": {
+        "name": "Habitly",
+        "subtitle": "Habitly Habit Tracker App",
+        "keywords": "habit, tracker, best, app, streaks, routine",
+        "description": "Track habits. Habit tracker for habits. Best habit tracker app with habit tracking."
+      },
+      "play": {
+        "title": "Habitly - Habit Tracker",
+        "shortDescription": "The best habit tracker!! Download now!",
+        "fullDescription": "The best habit tracker!! Download now! Habit tracker, habits, routine, streak, planner, goals, habit tracker app."
+      }
+    }
+  }
+}

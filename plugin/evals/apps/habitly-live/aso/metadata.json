@@ -1,0 +1,25 @@
+{
+  "app": "Habitly",
+  "brand": "Habitly",
+  "developer": "Northwind Labs",
+  "competitors": ["Streaks", "Habitify"],
+  "locales": {
+    "en-US": {
+      "primaryKeyword": "habit tracker",
+      "ios": {
+        "name": "Habitly: Habit Tracker & Diary",
+        "subtitle": "Routine Planner & Reminders",
+        "keywords": "streak,journal,mood,self,care,productivity,checklist,water,sleep,morning,daily,motivation,widget",
+        "promotionalText": "Check off today's habits in one tap, and every Sunday see which ones stuck and which slipped.",
+        "description": "Habitly is a habit tracker that helps busy people build routines that last.\n\n• Today: the day's habits as a checklist\n• Streak calendar: every day you kept a habit\n• Weekly review: which habits stuck and which slipped\n• Reminders at the time you usually do the habit\n• Widgets and a one-line mood note\n\nFree with up to 5 habits; Habitly Plus unlocks unlimited habits and the full review history.",
+        "whatsNew": "First release: a daily habit checklist, a streak calendar and a weekly review."
+      },
+      "play": {
+        "title": "Habitly: Habit Tracker & Diary",
+        "shortDescription": "Build daily routines that stick, with timely reminders and a weekly review.",
+        "fullDescription": "Habitly is a habit tracker that helps busy people build routines that last. Pick a few habits, check them off each day, and let the habit tracker show your streak for each one.\n\n• Today: the day's habits as a checklist\n• Streak calendar: every day you kept a habit\n• Weekly review: which habits stuck and which slipped\n• Reminders at the time you usually do the habit, learned from your check-ins\n• Widgets: check off a habit from the home screen\n• Mood note: one line about your day, next to your habits in the review\n\nUse Habitly as a habit tracker and a short daily diary. Free with up to 5 habits; Habitly Plus unlocks unlimited habits and the full review history.",
+        "releaseNotes": "First release: a daily habit checklist, a streak calendar and a weekly review."
+      }
+    }
+  }
+}
