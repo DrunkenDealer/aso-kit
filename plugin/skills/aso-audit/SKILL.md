@@ -34,7 +34,7 @@ Then judge what the checker can't, field by field, against `copy.md` and `keywor
 |---|---|
 | Name / title | brand plus one head phrase; under 30 but not wasting more than ~8 chars |
 | iOS subtitle | new keywords, no name words, value readable in ~26 chars |
-| iOS keyword field | ≥ 90 bytes, single words, no repeats of name or subtitle |
+| iOS keyword field | ≥ 90 characters, single words, no repeats of name or subtitle |
 | Play short description | a benefit with 1–2 targets, not the full description's opening |
 | Description | positioning sentence first; Play: head term in the first three sentences, 3–5 times total |
 | Targets | if `aso/keywords-<locale>.md` exists: each top-5 target sits in an indexed field |

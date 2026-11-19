@@ -27,7 +27,7 @@
 - **iOS name:** Habit Tracker & Diary · **subtitle:** Daily Routine & Goal Planner
 - **Play title:** Habit Tracker & Diary · **short description:** daily routine, reminders
 
-## iOS keyword field (95/100 bytes)
+## iOS keyword field (95/100 chars)
 `streak,reminder,journal,mood,self,care,productivity,checklist,water,sleep,morning,todo,motivation`
 
 ## Reserve

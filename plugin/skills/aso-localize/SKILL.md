@@ -31,7 +31,7 @@ Market notes worth checking:
 
 - **de** — compounds index as one word (`Gewohnheitstracker` ≠ `Gewohnheit Tracker`); check both in suggest.
 - **pt-BR vs pt-PT, es-MX vs es-ES** — separate vocabularies; on iOS separate storefronts.
-- **ja, ko, zh** — no spaces between words; the keyword field budget is in bytes (3 per CJK character in UTF-8).
+- **ja, ko, zh** — no spaces between words; the keyword field counts characters, so one CJK character costs 1 (`ios-metadata.md`).
 - **Plurals** — outside English Apple may not fold them (`ios-metadata.md`); keep the form the suggestions show.
 
 ## 3. Native review gate
@@ -45,7 +45,7 @@ Before the copy is final, one `AskUserQuestion`:
 ## Console
 
 ```
-aso-localize · <locale> · <market | slot for us, ca> · <final | draft> · field <n>/100 bytes
+aso-localize · <locale> · <market | slot for us, ca> · <final | draft> · field <n>/100 chars
 → aso/metadata-<locale>.md
 ```
 

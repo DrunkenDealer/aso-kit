@@ -6,7 +6,7 @@
 |---|---|---|---|
 | App name | 2–30 chars | Yes — strongest | Yes |
 | Subtitle | 30 chars | Yes | Yes |
-| Keyword field | 100 (bytes per ASC Help, characters per guides) | Yes | Yes |
+| Keyword field | 100 chars (ASC Help says bytes; live fields show characters) | Yes | Yes |
 | Developer (company) name | — | Yes | — |
 | Primary / secondary category | — | Yes | Yes |
 | Promotional text | 170 chars | **No** | No — edit any time |
@@ -20,7 +20,7 @@
 - Name, subtitle, keywords, description, What's New and categories are version-bound; promotional text and IAP display names are not. [official](https://developer.apple.com/help/app-store-connect/reference/app-information/required-localizable-and-editable-properties) · 2026-11-19
 - Keyword field: "up to 100 bytes", each keyword "greater than two characters". [official](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information) · 2026-11-19
 - Keyword field: "100 characters", comma-separated, no spaces after commas; spaces allowed inside a phrase. [official](https://developer.apple.com/app-store/search/) · 2026-11-19
-- **Disputed** — bytes vs characters. Budget by bytes: Cyrillic, Arabic, CJK fit fewer terms. [official](https://developer.apple.com/help/app-store-connect/reference/app-information/platform-version-information) · 2026-11-19
+- **Disputed** — bytes vs characters: of 5,304 live keyword fields, 1,339 exceed 100 bytes and none exceeds 100 characters (Japanese up to 262 bytes), so characters are enforced; a CJK character costs 1. [data](https://appdrift.co/blog/aso-localization) · 2026-10-01
 - "Your app is searchable … by app name, app subtitle, keywords, and your company name." [official](https://developer.apple.com/help/app-store-connect/create-an-app-record/view-and-edit-app-information) · 2026-11-19
 - Text relevance = title, subtitle, keywords, primary category; primary and secondary categories are indexed. [official](https://developer.apple.com/app-store/search/) · 2026-11-19
 - Promotional text "doesn't affect your app's search ranking so it should not be used to display keywords." [official](https://developer.apple.com/app-store/product-page/) · 2026-11-19

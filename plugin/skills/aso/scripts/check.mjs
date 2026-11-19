@@ -34,7 +34,6 @@ const add = (level, locale, field, msg) => {
 };
 
 const chars = (s) => [...s].length;
-const bytes = (s) => Buffer.byteLength(s, "utf8");
 const words = (s) => s.toLowerCase().normalize("NFC").match(/[\p{L}\p{N}]+/gu) ?? [];
 // Whole-word or whole-phrase match; Unicode-aware so CJK and Cyrillic entries work.
 const has = (text, term) =>
@@ -44,7 +43,7 @@ const singular = (w) => w.replace(/(?<=[^aeiou])ies$/, "y").replace(/(?<=(s|x|z|
 function limit(locale, store, field, value) {
   const spec = L[store][field];
   if (!spec || value == null) return;
-  const n = spec.unit === "bytes" ? bytes(value) : chars(value);
+  const n = chars(value);
   if (n > spec.max) add("error", locale, `${store}.${field}`, `${n}/${spec.max} ${spec.unit}`);
   if (spec.min && n < spec.min) add("error", locale, `${store}.${field}`, `shorter than ${spec.min}`);
   if (spec.fill && n < spec.max * spec.fill) add("warn", locale, `${store}.${field}`, `${n}/${spec.max} ${spec.unit} — indexed space left unused`);
@@ -119,8 +118,8 @@ function keywordField(locale, f, lang) {
       seen.set(base, w);
     }
   }
-  const used = bytes(kw);
-  if (used < L.ios.keywords.fillTarget) add("warn", locale, "ios.keywords", `${used}/100 bytes — room for more terms`);
+  const used = chars(kw);
+  if (used < L.ios.keywords.fillTarget) add("warn", locale, "ios.keywords", `${used}/100 chars — room for more terms`);
 }
 
 const section = (md, title) => md.split(/^## /m).find((x) => x.startsWith(title)) ?? "";

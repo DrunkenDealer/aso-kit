@@ -56,6 +56,6 @@ If you add a language, users "can search for your app using localized keywords i
 ## Per-locale checks
 
 1. Run the keyword method (`keyword-method.md`) again, using that locale's autocomplete and competitors.
-2. iOS: budget the keyword field in bytes for non-Latin scripts. Check whether plurals rank separately.
+2. iOS: the keyword field counts characters, so CJK fits about twice as many terms as English (`ios-metadata.md`). Check whether plurals rank separately.
 3. Ban the local words for "free" and "best" (`limits.json` → `banned.locale`).
 4. A native speaker reviews the copy before it ships. Without one, mark the locale `draft`.

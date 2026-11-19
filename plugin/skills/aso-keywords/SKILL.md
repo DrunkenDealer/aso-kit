@@ -41,10 +41,10 @@ Relevance gate, then volume, difficulty and relevance 1–3 each, opportunity = 
 
 Cluster and place per `keyword-method.md` § 4: head term → name / title, second cluster → subtitle / short description, everything else → the iOS keyword field and the Play full description.
 
-**Pack the iOS keyword field once, here.** Single words, comma-separated, no spaces, none of the words planned for the name or subtitle, no plural of a word already in, no banned word from `limits.json`, filled to ≥ 90 of 100 **bytes**:
+**Pack the iOS keyword field once, here.** Single words, comma-separated, no spaces, none of the words planned for the name or subtitle, no plural of a word already in, no banned word from `limits.json`, filled to ≥ 90 of 100 characters:
 
 ```
-node -e 'console.log(Buffer.byteLength(process.argv[1]))' "<field>"
+node -e 'console.log([...process.argv[1]].length)' "<field>"
 ```
 
 ## 5. Write `aso/keywords-<locale>.md`
@@ -65,7 +65,7 @@ node -e 'console.log(Buffer.byteLength(process.argv[1]))' "<field>"
 - **Play title:** <head phrase> · **short description:** <1–2 terms>
 - **Play full description:** <cluster terms for the first three sentences and bullets>
 
-## iOS keyword field (<n>/100 bytes)
+## iOS keyword field (<n>/100 chars)
 `streak,reminder,journal,...`
 
 ## Competitors
@@ -87,7 +87,7 @@ Fix every `✗` and run again until exit 0: a target without a source, a competi
 ## Console
 
 ```
-aso-keywords · <locale> · <n> targets · head "<term>" · field <n>/100 bytes
+aso-keywords · <locale> · <n> targets · head "<term>" · field <n>/100 chars
 → aso/keywords-<locale>.md
 ```
 
