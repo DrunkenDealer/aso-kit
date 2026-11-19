@@ -16,3 +16,14 @@ What `check.mjs` can't count. The `aso-verifier` agent answers each item PASS, F
 | 10 | Cross-localization | A secondary App Store locale reads as real copy in its language and repeats no word from the primary locale's name, subtitle or keyword field | `localization.md` § App Store |
 
 Item 10 is N/A unless the locale is planned as a secondary slot. Items 8 and 9 are N/A for fields that don't exist yet.
+
+## Locale vs primary
+
+Only for a locale other than the primary one. The words differ on purpose (each locale has its own keyword plan); the meaning must not. Back-translate the name, subtitle, short description and the positioning sentence into plain English first, then compare with the primary locale's copy.
+
+| # | Item | PASS when | Rule |
+|---|---|---|---|
+| 11 | Same promise | The positioning sentence back-translates to the same app type, audience and goal as the primary's | `copy.md` § Description 1 |
+| 12 | Same claims | No feature, number or promise the primary doesn't make, and none of the primary's top three features missing | `policy.md` § Both stores 2–3 |
+| 13 | Own words, same sense | Name and subtitle carry this locale's targets from `keywords-<locale>.md`, and each back-translation is still true of the app; a literal translation of the primary's head term passes only if the keyword plan chose it | `localization.md` |
+| 14 | Same voice | Register and form of address fit the market (du/Sie, tu/vous, keigo) and match the primary's tone | `localization.md` |

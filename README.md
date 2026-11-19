@@ -50,8 +50,9 @@ The brief works for any designer too.
   title rules, description density, and events, IAPs, product pages, tags and promo content; grades a keyword plan
   for sources and packing; checks line budgets. `node check.mjs aso/metadata.json`
 - [`agents/aso-verifier`](plugin/agents/aso-verifier.md) — a second reader on Haiku: grades the copy against a
-  10-item [rubric](plugin/skills/aso/references/rubric.md) (plan applied, true claims, native language, policy
-  tone) with a quote per verdict, after the checker passes.
+  [rubric](plugin/skills/aso/references/rubric.md) (plan applied, true claims, native language, policy tone) with a
+  quote per verdict, after the checker passes. For a second language it back-translates the key lines and checks
+  they promise what the English does.
 - [`scripts/store.mjs`](plugin/skills/aso/scripts/store.mjs) — autocomplete, search, lookup and charts from both
   stores' public endpoints. `node store.mjs probe` checks they still work.
 - [`scripts/drift.mjs`](plugin/skills/aso/scripts/drift.mjs) — fails when a fact lacks a source or a date, is older
