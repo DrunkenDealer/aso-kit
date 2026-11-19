@@ -21,6 +21,7 @@ Read `references/conventions.md` first: output paths, the state block, the conso
 | 3 | `/aso-metadata <locale>` | context, keywords | `aso/metadata.json`, `aso/metadata-<locale>.md`, optional `aso/screenshot-brief.md` |
 | 4 | `/aso-audit` | a live listing, or `aso/metadata.json` | `aso/audit.md` |
 | later, on request | `/aso-localize <locale>` | steps 1–3 live and measured in the primary locale | the same files for one more locale |
+| every release | `/aso-release` | git history; `aso/metadata.json` for live locales | What's New and Play notes, `aso/release.md`, a row in `aso/releases.md` |
 | maintenance | `/aso-refresh` | — | an updated knowledge base |
 
 Screenshots are not a step. `/aso-metadata` offers a brief; `/vitrine-deck` builds from it if the developer has it installed.

@@ -29,10 +29,11 @@ Then open your app's repo and ask **"Where do I start with ASO?"** (or `/aso-kit
 | `aso-keywords` | seeds, live autocomplete from both stores, competitor patterns, scored targets, the packed iOS keyword field | `aso/keywords-<locale>.md` |
 | `aso-metadata` | every text field for both stores, graded until clean; optional screenshot brief | `aso/metadata.json`, `aso/metadata-<locale>.md`, `aso/screenshot-brief.md` |
 | `aso-audit` | text-only audit of a live listing or a draft, fixes by when they can ship, how to measure | `aso/audit.md` |
-| `aso-localize` | a new market with native keyword research, App Store cross-localization, native review gate | per-locale files |
+| `aso-localize` | one more market, later and on request: native keyword research, meaning checked against English, native review gate | per-locale files |
+| `aso-release` | release notes from the commits since the last release: What's New and Play notes per live locale, promotional text when there's news, a listing verdict | `aso/release.md`, `aso/releases.md` |
 | `aso-refresh` | re-checks the knowledge base against the stores' docs and live probes | patches with new dates |
 
-Output lives in one `aso/` folder in your repo. Nothing touches `fastlane/metadata/` unless you say yes.
+Output lives in one `aso/` folder in your repo; `aso/changelog.md` and `aso/releases.md` record what shipped. Nothing touches `fastlane/metadata/` unless you say yes.
 
 ## Screenshots
 
