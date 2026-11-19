@@ -1,8 +1,8 @@
 ---
 name: fire-keywords
 tags: [trigger]
-plugins: ["../../.."]
-runs: 2
+plugins: ["../.."]
+runs: 3
 max_turns: 3
 allowed_tools: [Skill, Read, Glob]
 ---
