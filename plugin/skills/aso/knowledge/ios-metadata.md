@@ -13,6 +13,8 @@
 | Description | 4000 chars, plain text | **No** (App Store); used for web search | Yes |
 | What's New | 4000 chars | No | Yes (required after v1) |
 | In-App Event name / short / long | 30 / 50 / 120 | Event is searchable; app-ranking effect disputed | Reviewed separately |
+| In-App Purchase display name / description | 30 / 45 (stricter of Apple's two figures) | Yes | Reviewed with the IAP |
+| Custom product page promotional text | 170 chars | No | Reviewed per page |
 
 - Name 2–30 chars; editable only with a new version once submitted. [official](https://developer.apple.com/help/app-store-connect/reference/app-information/app-information) · 2026-11-19
 - Name, subtitle, keywords, description, What's New and categories are version-bound; promotional text and IAP display names are not. [official](https://developer.apple.com/help/app-store-connect/reference/app-information/required-localizable-and-editable-properties) · 2026-11-19

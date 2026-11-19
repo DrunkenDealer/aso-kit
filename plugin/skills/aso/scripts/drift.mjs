@@ -43,10 +43,14 @@ for (const [file, label, value] of [
   ["ios-metadata.md", "Promotional text", limits.ios.promotionalText.max],
   ["ios-metadata.md", "Description", limits.ios.description.max],
   ["ios-metadata.md", "What's New", limits.ios.whatsNew.max],
+  ["ios-metadata.md", "In-App Event name / short / long", limits.lists["ios.events"].fields.long.max],
+  ["ios-metadata.md", "In-App Purchase display name / description", limits.lists["ios.iaps"].fields.description.max],
+  ["ios-metadata.md", "Custom product page promotional text", limits.lists["ios.customProductPages"].fields.promotionalText.max],
   ["play-metadata.md", "App name (title)", limits.play.title.max],
   ["play-metadata.md", 'Short description ("Promotional description")', limits.play.shortDescription.max],
   ["play-metadata.md", "Full description", limits.play.fullDescription.max],
   ["play-metadata.md", "Release notes", limits.play.releaseNotes.max],
+  ["play-metadata.md", "Tags", limits.lists["play.tags"].maxItems],
 ]) {
   const table = rowLimit(file, label);
   if (table !== value) problems.push(`${file} "${label}" table says ${table}, limits.json says ${value}`);

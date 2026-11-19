@@ -11,7 +11,13 @@
   "play": {
     "title": { "max": 30, "unit": "chars", "indexed": true },
     "shortDescription": { "max": 80, "unit": "chars", "indexed": "disputed" },
-    "fullDescription": { "max": 4000, "unit": "chars", "indexed": true, "primaryMentions": [3, 5], "maxDensity": 0.04 },
+    "fullDescription": {
+      "max": 4000,
+      "unit": "chars",
+      "indexed": true,
+      "primaryMentions": [3, 5],
+      "maxDensity": 0.04
+    },
     "releaseNotes": { "max": 500, "unit": "chars", "indexed": "unverified" }
   },
   "banned": {
@@ -40,5 +46,46 @@
     "emoji": "\\p{Extended_Pictographic}",
     "repeatedPunctuation": "([!?.*★])\\1",
     "allCapsWord": "\\b[A-Z]{4,}\\b"
+  },
+  "lists": {
+    "ios.events": {
+      "maxItems": 10,
+      "indexed": "disputed",
+      "fields": {
+        "name": { "max": 30, "unit": "chars" },
+        "short": { "max": 50, "unit": "chars" },
+        "long": { "max": 120, "unit": "chars" }
+      }
+    },
+    "ios.iaps": {
+      "indexed": true,
+      "fields": {
+        "name": {
+          "max": 30,
+          "unit": "chars",
+          "disputed": [30, 35]
+        },
+        "description": {
+          "max": 45,
+          "unit": "chars",
+          "disputed": [45, 55]
+        }
+      }
+    },
+    "ios.customProductPages": {
+      "maxItems": 70,
+      "indexed": false,
+      "fields": {
+        "promotionalText": { "max": 170, "unit": "chars" }
+      }
+    },
+    "play.tags": { "maxItems": 5, "indexed": true },
+    "play.promotionalContent": {
+      "indexed": "unverified",
+      "fields": {
+        "title": { "max": 80, "unit": "chars", "source": "practitioner" },
+        "description": { "max": 500, "unit": "chars", "source": "practitioner" }
+      }
+    }
   }
 }
