@@ -23,7 +23,7 @@ A separate step, one locale per run. The primary locale (`en-US` unless the app 
 | Another non-primary locale is `ready` or `live` inside its window | One at a time: measure <locale> first. |
 | This locale exists and its `Built on` is older than the primary's latest `live` row | The source changed: recommend updating this locale from the current primary (the usual reason to re-run). |
 
-No warnings → go on. Otherwise one `AskUserQuestion` listing them, with **Wait** (recommended unless the only finding is the last row) · **Proceed anyway** · and, where a row recommends a skill, that skill. Proceeding anyway is recorded in the changelog row's Change cell (`against gate: <reason>`).
+No warnings → go on. Otherwise one `AskUserQuestion` listing them. When a finding asks to wait (rows 1, 2, 5), offer **Wait** (recommended) · **Proceed anyway** · and, where a row recommends a skill, that skill. When the only findings are a first localization or a stale locale, offer **Proceed** (recommended) · **Cancel**. Proceeding anyway is recorded in the changelog row's Change cell (`against gate: <reason>`).
 
 A cross-localization slot counts as a locale here: one at a time, same windows.
 
