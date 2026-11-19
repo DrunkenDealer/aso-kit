@@ -46,7 +46,7 @@ All read-only except where noted; all need Node ≥ 18.
 
 ## Locale and storefront
 
-Copy is keyed by **locale** (`en-US`, `de-DE`, `pt-BR`); store calls by **storefront** (`--cc us`) and, on Play, **language** (`--lang de`). Derive both from the locale before any network call: `en-US → us/en`, `en-GB → gb/en`, `de-DE → de/de`, `pt-BR → br/pt`, `es-MX → mx/es`, `ja → jp/ja`, `ko → kr/ko`, `zh-Hans → cn/zh`, `zh-Hant → tw/zh`. A locale with no country (`fr`) takes its main market (`fr`).
+Copy is keyed by **locale** (`en-US`, `de-DE`, `pt-BR`); store calls by **storefront** (`--cc us`) and, on Play, **language** (`--lang de`). Derive both from the locale before any network call: `en-US → us/en`, `en-GB → gb/en`, `de-DE → de/de`, `pt-BR → br/pt`, `es-MX → mx/es`, `ja → jp/ja`, `ko → kr/ko`, `zh-Hans → cn/zh`, `zh-Hant → tw/zh`, `uk → ua/uk`, `hi → in/hi`, `ar-SA → sa/ar`. A locale with no country (`fr`) takes its main market (`fr`).
 
 ## metadata.json
 

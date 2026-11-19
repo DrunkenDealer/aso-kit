@@ -1,8 +1,8 @@
 ---
 name: aso-localize
-description: Adds one App Store / Google Play locale after the English listing is live and measured — fresh keyword research in that market's language (keywords don't translate), copy checked for the same meaning as English, App Store cross-localization, a native-speaker review gate. A separate step, never part of the default flow; warns before a first or a parallel localization. Triggers on "localize my app listing", "ASO for Germany", "add Spanish App Store keywords", "cross-localization".
+description: Adds one App Store / Google Play locale after the English listing is live and measured — fresh keyword research in that market's language (keywords don't translate), copy checked for the same meaning as English, App Store cross-localization, a native-speaker review gate. A separate step, never part of the default flow; warns before a first or a parallel localization. Triggers on "localize my app listing", "ASO for Ukraine", "add Japanese App Store keywords", "listing in Hindi", "cross-localization".
 user-invocable: true
-argument-hint: "<one locale>  e.g. de-DE, es-MX, ja"
+argument-hint: "<one locale>  e.g. de-DE, uk, ja, hi, ar-SA"
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, AskUserQuestion
 ---
 
@@ -31,7 +31,8 @@ A cross-localization slot counts as a locale here: one at a time, same windows.
 
 From the storefront table in `localization.md`:
 
-- **Market locale** — the storefront's default language (de-DE for Germany). Full listing, real copy.
+- **Market locale** — the storefront's default language (de-DE for Germany, ja for Japan). Full listing, real copy.
+- **Market language, additional on iOS** — the language most of the market reads, while the storefront's default is en-GB (uk in Ukraine, hi in India, ar in Saudi Arabia). Full listing, real copy, written like a market locale; users whose device is set to it see it. On iOS the storefront also indexes the default locale — `en-GB`, or the primary if the app has none — so its keyword field must not repeat a word indexed there, as for a slot. On Play it is simply that language.
 - **Cross-localization slot** — an extra locale a storefront also indexes (es-MX in the US, en-GB almost everywhere outside the US). On iOS it adds 160 indexed characters; its name and subtitle must still read as genuine copy in that language, because some users see them.
 
 Say which job this locale has, and for a slot which storefronts it reaches.
@@ -40,7 +41,7 @@ Say which job this locale has, and for a slot which storefronts it reaches.
 
 1. Run `/aso-keywords <locale>` with the Skill tool. Seeds come from that market's language and its own competitors — never a translation of the primary list.
 2. For a cross-localization slot, its keyword field must not repeat a word from the default locale's name, subtitle or keywords in the same storefront: those are already indexed there.
-3. Run `/aso-metadata <locale>`. It grades with `check.mjs`, which applies the locale's banned words (`limits.json` → `banned.locale`), then with `aso-verifier`; for a slot, tell it so, so rubric item 10 applies.
+3. Run `/aso-metadata <locale>`. It grades with `check.mjs`, which applies the locale's banned words (`limits.json` → `banned.locale`), then with `aso-verifier`; for a slot or an additional iOS language, tell it so, so rubric item 10 applies.
 
 The copy is written fresh in the locale's language to its own limits — never the English copy translated and trimmed. A 30-character English field grows 60–80% in most European languages, and German fills the subtitle hardest (`length-and-packing.md`). Where two local words mean the same, take the one autocomplete shows, then the shorter.
 
@@ -49,6 +50,9 @@ Market notes worth checking:
 - **de, nl** — compounds partly match their split form; use the compound in the name and add the head noun alone to the keyword field. `ue` for `ü` is a different query.
 - **pt-BR vs pt-PT, es-MX vs es-ES** — separate vocabularies; on iOS separate storefronts.
 - **ja, ko, zh** — no spaces between words; the keyword field counts characters, so one CJK character costs 1 and the field holds about twice as many terms. Kana and kanji fold; romaji doesn't on Play.
+- **uk, ru** — Ukraine's storefront indexes both, and many Ukrainian users search in Russian. Write Ukrainian copy; take a Russian term only for the keyword field, and only if autocomplete in `--cc ua` shows it. Ukrainian words that look Russian (і/и, є/е, ї) are different queries until a `store.mjs match` probe says otherwise.
+- **hi** — check autocomplete for Latin-script (Hinglish) and English queries in `--cc in` as well and compare their suggestions with the Devanagari ones. Keep the copy in Devanagari; a Latin-script term goes in the keyword field.
+- **ar** — right to left; the brand stays in Latin script, so name and title mix directions — read them as they render, brand first or last but never splitting the phrase. Arabic text runs ~0.83 of English (`length-and-packing.md`), so the fields fill more easily than in European languages.
 - **Plurals** — outside English both stores treat them as separate queries (`length-and-packing.md`); put the suggested form in name or subtitle and the other in the keyword field if it fits.
 
 ## 3. Native review gate
