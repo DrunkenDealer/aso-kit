@@ -72,7 +72,7 @@ Claude Code and Node.js 18+.
 node --test evals/check.test.mjs          # checker against good and bad fixtures
 node plugin/skills/aso/scripts/drift.mjs  # knowledge-base lint
 claude plugin eval plugin --tag trigger   # does each skill fire, and stay quiet off-topic
-claude plugin eval plugin --tag quality --scaffold   # full runs on a fixture app, graded by regex and an LLM judge
+claude plugin eval plugin --tag quality --scaffold --allow-tools Write Edit Bash   # full runs on a fixture app, graded by regex and an LLM judge
 ```
 
 Quality cases stage `plugin/evals/apps/habitly` (a pre-launch app) or overlay `habitly-live` (en-US live and
