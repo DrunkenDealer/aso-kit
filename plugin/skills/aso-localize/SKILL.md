@@ -1,8 +1,8 @@
 ---
 name: aso-localize
-description: Adds an App Store / Google Play locale with fresh keyword research in that market's language — keywords don't translate — plus App Store cross-localization (extra locales a storefront also indexes) and a native-speaker review gate. Triggers on "localize my app listing", "ASO for Germany", "add Spanish App Store keywords", "cross-localization".
+description: Adds one App Store / Google Play locale after the English listing is live and measured — fresh keyword research in that market's language (keywords don't translate), copy checked for the same meaning as English, App Store cross-localization, a native-speaker review gate. A separate step, never part of the default flow; warns before a first or a parallel localization. Triggers on "localize my app listing", "ASO for Germany", "add Spanish App Store keywords", "cross-localization".
 user-invocable: true
-argument-hint: "<locale>  e.g. de-DE, es-MX, ja"
+argument-hint: "<one locale>  e.g. de-DE, es-MX, ja"
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, AskUserQuestion
 ---
 
@@ -10,7 +10,22 @@ allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, AskUserQuestion
 
 Produces `aso/keywords-<locale>.md`, `aso/metadata-<locale>.md` and the locale's entry in `aso/metadata.json`. Method: `../aso/knowledge/localization.md`. Paths, gates, console: `../aso/references/conventions.md`. Bare knowledge file names (`copy.md`, `limits.json`…) are in `../aso/knowledge/`.
 
-Needs the primary locale done (`aso/metadata.json` has it). Without it, say so and offer `/aso-metadata` for the primary first.
+## 0. Gate
+
+A separate step, one locale per run. The primary locale (`en-US` unless the app has no English listing) is the source; every other locale is built from its live, measured version. Read `aso/changelog.md` (format in `conventions.md`) and collect every warning that applies:
+
+| Finding | Warning |
+|---|---|
+| No changelog row for the primary | The primary listing isn't written yet. Recommend `/aso-metadata` for it first. |
+| The primary's latest row is `ready`, or `live` less than ~4 weeks ago (iOS; 6–8 weeks on Play) | The source isn't proven yet: localizing it copies what may not work. Recommend waiting until <date>. |
+| No other locale in the changelog — a first localization | Show once: localization pays one market at a time, with fresh research and a measured result before the next; many markets at once by machine translation, unmeasured, is what fails (`localization.md` § Sequencing). |
+| More than one locale asked for | Take one — the one with traction or listed first in `aso/context.md` → Markets — and name the rest as next. |
+| Another non-primary locale is `ready` or `live` inside its window | One at a time: measure <locale> first. |
+| This locale exists and its `Built on` is older than the primary's latest `live` row | The source changed: recommend updating this locale from the current primary (the usual reason to re-run). |
+
+No warnings → go on. Otherwise one `AskUserQuestion` listing them, with **Wait** (recommended unless the only finding is the last row) · **Proceed anyway** · and, where a row recommends a skill, that skill. Proceeding anyway is recorded in the changelog row's Change cell (`against gate: <reason>`).
+
+A cross-localization slot counts as a locale here: one at a time, same windows.
 
 ## 1. Pick the locale's job
 
@@ -47,7 +62,7 @@ Before the copy is final, one `AskUserQuestion`:
 ## Console
 
 ```
-aso-localize · <locale> · <market | slot for us, ca> · <final | draft> · field <n>/100 chars
+aso-localize · <locale> · <market | slot for us, ca> · <final | draft> · rubric <n>/<n> · field <n>/100 chars
 → aso/metadata-<locale>.md
 ```
 

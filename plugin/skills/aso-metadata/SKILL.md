@@ -2,7 +2,7 @@
 name: aso-metadata
 description: Writes the App Store and Google Play text for one locale — app name, subtitle, keyword field, promotional text, description, What's New; Play title, short and full description, release notes — from a scored keyword set, graded by a checker against store limits and policy until it passes. Optionally writes a screenshot brief for /vitrine-deck. Triggers on "write my app store description", "optimize my title and subtitle", "store listing copy", "ASO metadata", "short description for Google Play".
 user-invocable: true
-argument-hint: "[locale, default the primary one]"
+argument-hint: "[locale, default en-US]"
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, Agent, AskUserQuestion
 ---
 
@@ -50,7 +50,7 @@ Short and paste-ready:
 | Field | Text | Len |
 | Name | Habitly: Habit Tracker | 22/30 |
 | Subtitle | … | 28/30 |
-| Keywords | … | 94/100 B |
+| Keywords | … | 94/100 |
 | Promotional text | <evergreen> | 71/170 |
 
 <details><summary>Description (1,240/4000)</summary>…</details>
@@ -72,11 +72,15 @@ Promotional text, other variants: launch — … · time-bound — …
 | iOS name, subtitle, keywords, description | next app version | App Store Connect → version → <locale> |
 | iOS promotional text | any time | App Store Connect → version page |
 | Play fields | listing update, hours to 7 days | Play Console → Grow → Store listing |
+
+When it's live, set its row in `aso/changelog.md` to `live YYYY-MM-DD`; the measuring window starts then.
 ```
 
 If `fastlane/metadata/` exists, offer to write the fields there (gate 3).
 
-Run `node ../aso/scripts/check.mjs aso/` and trim any file over its line budget. Update the state line `Metadata`.
+Append a row to `aso/changelog.md` (format in `conventions.md`; create it if missing): today, the locale, the stores, the fields that changed, one line on what changed, `Built on` the primary's latest row date for a non-primary locale, status `ready`. Re-running on the same day replaces that day's `ready` row instead of adding one.
+
+Run `node ../aso/scripts/check.mjs aso/` and fix what it flags. Update the state line `Metadata`.
 
 ## 4. Screenshot brief — only if wanted
 
