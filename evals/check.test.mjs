@@ -46,3 +46,23 @@ test("a stuffed listing fails on every rule it breaks", () => {
   assert.ok(m.some((x) => x.startsWith("error en-US play.fullDescription: keyword list")));
   assert.ok(m.some((x) => x.includes("density")));
 });
+
+test("a clean keyword plan passes", () => {
+  const { code, findings } = run("plan-good/keywords-en-US.md");
+  assert.equal(code, 0);
+  assert.deepEqual(findings, []);
+});
+
+test("a keyword plan fails on sources, competitors and the packed field", () => {
+  const { code, findings } = run("plan-bad/keywords-en-US.md");
+  assert.equal(code, 1);
+  const m = msgs(findings);
+  for (const want of [
+    'error en-US keywords.targets: "motivation" has no source',
+    'error en-US keywords.targets: competitor name "Streaks" as a target',
+    'error en-US ios.keywords: "diary" already in name, subtitle or developer name',
+    'error en-US ios.keywords: wasted on "app"',
+    "warn en-US ios.keywords: metadata.json differs from the field packed in keywords-en-US.md",
+  ])
+    assert.ok(m.includes(want), `missing: ${want}`);
+});

@@ -1,18 +1,21 @@
 #!/usr/bin/env node
-// Grades a metadata.json against store limits and policy in ../knowledge/limits.json.
-//   node check.mjs <metadata.json> [--json]
+// Grades a metadata.json, or a keywords-<locale>.md plan, against store limits and policy in ../knowledge/limits.json.
+//   node check.mjs <metadata.json | keywords-<locale>.md> [--json]
 // Exit 0 clean or warnings only, 1 on any error, 2 on bad input.
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const L = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), "../knowledge/limits.json"), "utf8"));
 const [file, flag] = process.argv.slice(2);
 if (!file) {
-  console.error("usage: check.mjs <metadata.json> [--json]");
+  console.error("usage: check.mjs <metadata.json | keywords-<locale>.md> [--json]");
   process.exit(2);
 }
-const meta = JSON.parse(readFileSync(file, "utf8"));
+const sibling = (name) => join(dirname(file), name);
+const plan = file.endsWith(".md") ? readFileSync(file, "utf8") : null;
+const metaFile = plan ? sibling("metadata.json") : file;
+const meta = existsSync(metaFile) ? JSON.parse(readFileSync(metaFile, "utf8")) : {};
 const out = [];
 const add = (level, locale, field, msg) => {
   if (!out.some((o) => o.locale === locale && o.field === field && o.msg === msg)) out.push({ level, locale, field, msg });
@@ -80,8 +83,13 @@ function ios(locale, f, lang) {
   const shared = words(f.subtitle ?? "").filter((w) => name.has(w) && w.length > 2);
   if (shared.length) add("warn", locale, "ios.subtitle", `repeats name words: ${[...new Set(shared)].join(", ")}`);
 
+  keywordField(locale, f, lang);
+}
+
+function keywordField(locale, f, lang) {
   const kw = f.keywords;
   if (kw == null) return;
+  limit(locale, "ios", "keywords", kw);
   if (/,\s|\s,/.test(kw)) add("error", locale, "ios.keywords", "space next to a comma wastes budget");
   if (/^,|,$|,,/.test(kw)) add("error", locale, "ios.keywords", "empty term");
   if (/[^\p{L}\p{N}, ]/u.test(kw)) add("warn", locale, "ios.keywords", "special characters become spaces");
@@ -101,6 +109,36 @@ function ios(locale, f, lang) {
   }
   const used = bytes(kw);
   if (used < L.ios.keywords.fillTarget) add("warn", locale, "ios.keywords", `${used}/100 bytes — room for more terms`);
+}
+
+const section = (md, title) => md.split(/^## /m).find((x) => x.startsWith(title)) ?? "";
+const rows = (sec) =>
+  sec.split("\n").filter((l) => l.startsWith("|") && !/^\|[\s|:-]+\|$/.test(l)).map((l) => l.split("|").slice(1, -1).map((c) => c.trim()));
+
+// The aso-keywords plan: targets need a source and no competitor names; the packed field obeys the same rules as in metadata.json.
+function keywordPlan(locale, md, lang) {
+  meta.competitors ??= existsSync(sibling("context.md")) ? rows(section(readFileSync(sibling("context.md"), "utf8"), "Competitors")).slice(1).map((r) => r[0]) : [];
+  const [head, ...targets] = rows(section(md, "Targets"));
+  const src = head?.findIndex((c) => /^source$/i.test(c)) ?? -1;
+  for (const t of targets) {
+    if (src < 0 || !t[src]) add("error", locale, "keywords.targets", `"${t[0]}" has no source`);
+    for (const c of meta.competitors) if (has(t[0], c)) add("error", locale, "keywords.targets", `competitor name "${c}" as a target`);
+  }
+  if (targets.length < 15) add("warn", locale, "keywords.targets", `${targets.length} targets; aim for 15–20`);
+
+  const placement = section(md, "Placement");
+  const name = placement.match(/\*\*iOS name:\*\*\s*([^·\n]*)/)?.[1].trim();
+  const subtitle = placement.match(/\*\*subtitle:\*\*\s*([^·\n]*)/)?.[1].trim();
+  const field = section(md, "iOS keyword field").match(/`([^`]*)`/)?.[1];
+  if (field == null) add("error", locale, "keywords.field", "no packed iOS keyword field");
+  keywordField(locale, { name, subtitle, keywords: field }, lang);
+
+  const live = meta.locales?.[locale];
+  if (live?.ios?.keywords != null && field != null && live.ios.keywords !== field)
+    add("warn", locale, "ios.keywords", `metadata.json differs from the field packed in keywords-${locale}.md`);
+  const headTerm = md.match(/\*\*Head term:\*\*\s*([^·\n]*)/)?.[1].trim();
+  for (const [k, v] of [["ios.name", live?.ios?.name], ["play.title", live?.play?.title]])
+    if (headTerm && v != null && !has(v, headTerm)) add("warn", locale, k, `head term "${headTerm}" planned here but missing`);
 }
 
 function play(locale, f, lang, primary) {
@@ -140,7 +178,10 @@ function play(locale, f, lang, primary) {
   if (!opening.includes(pw.join(" "))) add("warn", locale, "play.fullDescription", `"${primary}" not in the first three sentences`);
 }
 
-for (const [locale, entry] of Object.entries(meta.locales ?? {})) {
+if (plan) {
+  const locale = file.match(/keywords-(.+)\.md$/)?.[1] ?? "?";
+  keywordPlan(locale, plan, locale.split("-")[0].toLowerCase());
+} else for (const [locale, entry] of Object.entries(meta.locales ?? {})) {
   const lang = locale.split("-")[0].toLowerCase();
   if (entry.ios) ios(locale, entry.ios, lang);
   if (entry.play) play(locale, entry.play, lang, entry.primaryKeyword);

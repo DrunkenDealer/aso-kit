@@ -1,0 +1,30 @@
+{
+  "app": "Habitly",
+  "brand": "Habitly",
+  "developer": "Northwind Labs",
+  "competitors": ["Streaks", "Habitify"],
+  "locales": {
+    "en-US": {
+      "primaryKeyword": "habit tracker",
+      "ios": {
+        "name": "Habitly: Habit Tracker & Diary",
+        "subtitle": "Daily Routine & Goal Planner",
+        "keywords": "streak,reminder,journal,mood,self,care,productivity,checklist,water,sleep,morning,todo,motivation",
+        "promotionalText": "New this month: weekly reviews that show which routines actually stick.",
+        "description": "Habitly is a habit tracker that helps busy people build routines that last.",
+        "whatsNew": "Weekly reviews show which routines stick. Faster widget refresh.",
+        "events": [{ "name": "30-Day Morning Routine", "short": "Start one small habit each morning.", "long": "A month of short morning routines, one new habit a week, with a review every Sunday." }],
+        "iaps": [{ "name": "Habitly Plus", "description": "Unlimited habits and reviews." }],
+        "customProductPages": [{ "promotionalText": "Build a morning routine in five minutes a day." }]
+      },
+      "play": {
+        "title": "Habitly: Habit Tracker & Diary",
+        "shortDescription": "Build daily routines that stick, with gentle reminders and weekly reviews.",
+        "fullDescription": "Habitly is a habit tracker that helps busy people build routines that last. Set a goal, check it off, and watch your streak grow. The habit tracker adapts reminders to your day.\n\n• Routines: morning and evening checklists\n• Reviews: see which habits stick each week\n• Widgets: check off a habit from the home screen\n\nUse Habitly as a habit tracker, a mood journal, or a simple daily planner.",
+        "releaseNotes": "Weekly reviews and faster widgets.",
+        "tags": ["Habit tracker", "Productivity", "Self-care"],
+        "promotionalContent": [{ "title": "30-Day Morning Routine", "description": "One new habit a week, reviewed every Sunday." }]
+      }
+    }
+  }
+}

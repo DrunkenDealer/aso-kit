@@ -31,7 +31,8 @@ All read-only except where noted; all need Node ≥ 18.
 | Script | Use |
 |---|---|
 | `scripts/store.mjs` | `suggest`, `search`, `lookup`, `top` for both stores; `probe` checks every call |
-| `scripts/check.mjs <metadata.json>` | grades fields against `knowledge/limits.json`. Exit 1 = errors. Never ship with errors |
+| `scripts/check.mjs <metadata.json \| keywords-<locale>.md>` | grades fields, or a keyword plan, against `knowledge/limits.json`. Exit 1 = errors. Never ship with errors |
+| `scripts/store.mjs match` | whether a store folds two spellings into one word |
 | `scripts/drift.mjs` | lints the knowledge base (`/aso-refresh`) |
 
 ## Locale and storefront

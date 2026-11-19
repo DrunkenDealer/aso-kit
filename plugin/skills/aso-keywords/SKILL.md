@@ -76,7 +76,13 @@ node -e 'console.log(Buffer.byteLength(process.argv[1]))' "<field>"
 <terms to swap in when one fails check.mjs or a native reviewer>
 ```
 
-Update the state line `Keywords`.
+Then grade it:
+
+```
+node ../aso/scripts/check.mjs aso/keywords-<locale>.md
+```
+
+Fix every `✗` and run again until exit 0: a target without a source, a competitor name, a field word already planned for the name or subtitle. Update the state line `Keywords`.
 
 ## Console
 
