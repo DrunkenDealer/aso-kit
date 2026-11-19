@@ -71,6 +71,12 @@ Score each row ✓ / ! / ✗. No 0–100 total — a weighted score implies fiel
 
 Each fix names the field, the problem, and the replacement or the skill that writes it (`/aso-metadata`).
 
+Then `aso/changelog.md`, if it exists:
+
+- A `ready` row whose copy matches the live listing → set it `live` with the date the developer gives (ask once; today if unknown).
+- A `live` row past its window (iOS ~4 weeks, Play 6–8 weeks) with an empty Result → fill it: head-term rank before → now from `store.mjs search`, conversion if the developer has it.
+- `node ../aso/scripts/check.mjs aso/` reporting a locale `stale` → a **Next cycle** fix: "update <locale> from the current <primary> with `/aso-localize <locale>`". Never rewrite it here.
+
 Update the state line `Audit`.
 
 ## Console
