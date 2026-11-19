@@ -37,4 +37,4 @@ A claim with only `practitioner` evidence is never stated as a rule — skills s
 
 ## Updating
 
-`/aso-refresh` re-fetches each cited URL, re-runs the probes in `endpoints.md`, and proposes patches with the new date. `evals/drift.mjs` fails when a bullet lacks evidence or a date, when `limits.json` disagrees with the tables, or when a claim is older than 180 days.
+`/aso-refresh` re-fetches each cited URL, re-runs the probes in `endpoints.md`, and proposes patches with the new date. `../scripts/drift.mjs` fails when a bullet lacks evidence or a date, when `limits.json` disagrees with the tables, or when a claim is older than 180 days.
