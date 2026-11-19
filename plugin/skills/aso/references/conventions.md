@@ -6,7 +6,7 @@ Paths are relative to the `aso` skill folder; from any other skill, prefix `../a
 
 ## Output
 
-One folder, `aso/`, at the project root. No dates in file names; each file opens with its own date line. Re-running a skill overwrites its file — git keeps the history. The exception is `aso/changelog.md`: append-only, the record of what shipped where and how it did.
+One folder, `aso/`, at the project root. No dates in file names; each file opens with its own date line. Re-running a skill overwrites its file — git keeps the history. The exceptions are `aso/changelog.md` and `aso/releases.md`: append-only records of what shipped.
 
 | File | Written by | Holds |
 |---|---|---|
@@ -18,12 +18,14 @@ One folder, `aso/`, at the project root. No dates in file names; each file opens
 | `aso/screenshot-brief.md` | `/aso-metadata`, on request | the slide brief — format in `screenshot-brief.md` |
 | `aso/audit.md` | `/aso-audit` | scorecard, findings, measurement plan |
 | `aso/changelog.md` | `/aso-metadata` appends, `/aso-audit` updates status and result | one row per copy change per locale — the source `/aso-localize` gates on |
+| `aso/release.md` | `/aso-release` | this release: commits, What's New and Play notes per locale, promotional text proposal |
+| `aso/releases.md` | `/aso-release` appends | one row per release — where the next release's commits start |
 
 Line budgets — short is the point; `node ../aso/scripts/check.mjs aso/` flags a file over its budget:
 
 | File | Lines |
 |---|---|
-| `context.md`, `audit.md`, `screenshot-brief.md` | 50 |
+| `context.md`, `audit.md`, `screenshot-brief.md`, `release.md` | 50 |
 | `keywords-<locale>.md` | 40 |
 | `metadata-<locale>.md` | 60 |
 
@@ -86,6 +88,24 @@ A store the app isn't on is omitted. A field left out is not graded. Name, subti
 
 `check.mjs aso/` checks the table: eight cells, ISO dates, a valid status.
 
+Release notes don't go here: they aren't ranked, so there is nothing to measure, and a row every release would keep resetting the window `/aso-localize` waits on. Promotional text does — it moves conversion.
+
+## Releases
+
+```markdown
+> aso releases · all
+
+| Date | Version | Commits | Locales | What's New (primary) | Status |
+|---|---|---|---|---|---|
+| 2026-11-05 | 1.4.0 | 9f1e2a0..a1b2c3d | en-US, uk | Reminders now learn when you usually check in. | live 2026-11-07 |
+| 2026-11-19 | 1.5.0 | a1b2c3d..f9e8d7c | en-US, uk | Weekly review shows which habits slipped. Widgets refresh faster. | ready |
+```
+
+- **Commits** — `<from>..<to>`, short hashes; each row starts where the previous one ended. The first row's `from` may be `—` (from the first commit).
+- **Status** — `ready`, `live YYYY-MM-DD`, or `skipped` (a release with no user-facing change).
+
+`check.mjs aso/` checks six cells, ISO dates, a valid status, and that the ranges chain.
+
 ## State block
 
 The end of `aso/context.md`. `/aso-context` writes every line as `—`.
@@ -98,6 +118,7 @@ The end of `aso/context.md`. `/aso-context` writes every line as `—`.
 - Screenshot brief: —
 - Audit: —
 - Localized: —
+- Release: —
 ```
 
 Value: a date, optionally with locales (`2026-11-19 (en-US, de-DE)`). A skill writes only its own line, on success. No `aso/context.md` → skip the write, don't create the file.

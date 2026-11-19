@@ -76,6 +76,7 @@ One `AskUserQuestion` round, at most three questions, recommended default first.
 - Screenshot brief: —
 - Audit: —
 - Localized: —
+- Release: —
 ```
 
 On a re-run keep every state line except `Context`.

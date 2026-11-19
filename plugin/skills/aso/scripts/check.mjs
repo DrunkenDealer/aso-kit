@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Grades a metadata.json, or a keywords-<locale>.md plan, against store limits and policy in ../knowledge/limits.json.
 //   node check.mjs <metadata.json | keywords-<locale>.md> [--json]
-//   node check.mjs aso/ — line budgets of the md outputs, and aso/changelog.md (conventions.md)
+//   node check.mjs aso/ — line budgets of the md outputs, aso/changelog.md and aso/releases.md (conventions.md)
 // Exit 0 clean or warnings only, 1 on any error, 2 on bad input.
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -22,14 +22,38 @@ if (statSync(file).isDirectory()) {
     if (max && n > max) over++, console.log(`! ${f}: ${n}/${max} lines`);
   }
   if (!over) console.log("✓ every file within its line budget");
-  const log = join(file, "changelog.md");
-  process.exit(existsSync(log) ? changelog(readFileSync(log, "utf8")) : 0);
+  const read = (name) => (existsSync(join(file, name)) ? readFileSync(join(file, name), "utf8") : null);
+  const log = read("changelog.md"), rel = read("releases.md");
+  process.exit(Math.max(log ? changelog(log) : 0, rel ? releases(rel) : 0));
+}
+
+function tableRows(md) {
+  return md.split("\n").filter((l) => /^\|\s*\d/.test(l)).map((l) => l.split("|").slice(1, -1).map((c) => c.trim()));
+}
+
+// aso/releases.md (conventions.md § Releases): row format, and commit ranges that chain.
+function releases(md) {
+  const rows = tableRows(md);
+  let bad = 0, prev;
+  for (const r of rows) {
+    const [, from, to] = r[2]?.match(/^(—|[0-9a-f]{7,40})\.\.([0-9a-f]{7,40})$/) ?? [];
+    const why =
+      r.length !== 6 ? `${r.length} cells, want 6` :
+      !/^\d{4}-\d{2}-\d{2}$/.test(r[0]) ? `date "${r[0]}"` :
+      !to ? `commits "${r[2]}"` :
+      !/^(ready|skipped|live \d{4}-\d{2}-\d{2})$/.test(r[5]) ? `status "${r[5]}"` :
+      prev && !(from.startsWith(prev) || prev.startsWith(from)) ? `starts at ${from}, previous release ended at ${prev}` : null;
+    if (why) bad++, console.log(`✗ releases.md ${r[0]} ${r[1] ?? ""}: ${why}`);
+    prev = to;
+  }
+  if (!bad && rows.length) console.log(`✓ releases.md ${rows.length} rows`);
+  return bad ? 1 : 0;
 }
 
 // aso/changelog.md (conventions.md § Changelog): row format, and locales built on an older primary.
 function changelog(md) {
   const date = /^\d{4}-\d{2}-\d{2}$/;
-  const rows = md.split("\n").filter((l) => /^\|\s*\d/.test(l)).map((l) => l.split("|").slice(1, -1).map((c) => c.trim()));
+  const rows = tableRows(md);
   let bad = 0;
   for (const r of rows) {
     const why =

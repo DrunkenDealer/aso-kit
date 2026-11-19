@@ -94,3 +94,10 @@ test("the changelog fails on a malformed row", () => {
   assert.match(r.stdout, /✗ changelog\.md 2026-11-01 fr-FR: status "shipped"/);
   assert.match(r.stdout, /✗ changelog\.md 11\/02\/2026 es-MX: 7 cells, want 8/);
 });
+
+test("releases chain from one release to the next", () => {
+  assert.match(dir("aso-dir").stdout, /✓ releases\.md 2 rows/);
+  const r = dir("aso-dir-bad");
+  assert.match(r.stdout, /✗ releases\.md 2026-11-19 1\.5\.0: starts at 0000000, previous release ended at a1b2c3d/);
+  assert.match(r.stdout, /✗ releases\.md 2026-12-03 1\.6\.0: commits "v1\.5\.0\.\.HEAD"/);
+});
