@@ -24,6 +24,8 @@ test("a stuffed listing fails on every rule it breaks", () => {
   const m = msgs(findings);
   for (const want of [
     "error en-US ios.name: 50/30 chars",
+    'warn en-US ios.name: "&" instead of "and" saves 2 chars (iOS only partly matches them; keep "and" if the phrase is a target)',
+    'warn en-US play.title: ": " instead of a spaced dash or pipe saves a character',
     'error en-US ios.name: banned "android"',
     "error en-US ios.keywords: space next to a comma wastes budget",
     'error en-US ios.keywords: "habit" already in name, subtitle or developer name',

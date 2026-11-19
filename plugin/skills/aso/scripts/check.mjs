@@ -82,6 +82,14 @@ function common(locale, key, text, lang) {
   banned(locale, key, text, L.banned.locale[lang] ?? []);
 }
 
+// Characters a 30-char indexed field can win back (length-and-packing.md § Packing guidance 1–2).
+function spare(locale, key, text) {
+  if (!text) return;
+  if (/ [-–|] /.test(text)) add("warn", locale, key, `": " instead of a spaced dash or pipe saves a character`);
+  if (/\band\b/i.test(text))
+    add("warn", locale, key, `"&" instead of "and" saves 2 chars${key.startsWith("ios") ? " (iOS only partly matches them; keep \"and\" if the phrase is a target)" : ""}`);
+}
+
 function ios(locale, f, lang) {
   for (const k of Object.keys(L.ios)) limit(locale, "ios", k, f[k]);
   for (const [k, v] of Object.entries(f)) {
@@ -93,6 +101,7 @@ function ios(locale, f, lang) {
   const name = new Set(words(f.name ?? ""));
   const shared = words(f.subtitle ?? "").filter((w) => name.has(w) && w.length > 2);
   if (shared.length) add("warn", locale, "ios.subtitle", `repeats name words: ${[...new Set(shared)].join(", ")}`);
+  if (lang === "en") for (const k of ["name", "subtitle"]) spare(locale, `ios.${k}`, f[k]);
 
   keywordField(locale, f, lang);
 }
@@ -165,6 +174,7 @@ function play(locale, f, lang, primary) {
     if (caps.length) add("warn", locale, `play.${k}`, `ALL CAPS: ${caps.join(", ")}`);
   }
   for (const [k, v] of Object.entries(f)) if (typeof v === "string") common(locale, `play.${k}`, v, lang);
+  if (lang === "en") spare(locale, "play.title", f.title);
   lists(locale, "play", f, lang);
 
   const full = f.fullDescription;
