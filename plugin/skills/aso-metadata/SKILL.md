@@ -17,7 +17,7 @@ Needs `aso/keywords-<locale>.md`. Without it, offer `/aso-keywords` first; if de
 Only for the stores the app is on (or will be).
 
 1. **Name / title** — 2–3 variants of `Brand: Head Phrase` (`copy.md`), pick one. iOS name and Play title may differ.
-2. **iOS subtitle, Play short description** — 2–3 variants each, pick one.
+2. **iOS subtitle, Play short description** — 2–3 variants each, pick one. The subtitle states the value or main use case (`copy.md`); a target term that only fits as a list item goes to the keyword field instead.
 
    Fit the 30-character fields to the limit, not under it: write each variant, count it (`node -e 'console.log([...process.argv[1]].length)' "<text>"`), and if it is under 27, add the next target term that reads naturally; if over, apply the packing guidance in `length-and-packing.md` (`:` over ` - `, `&` over `and`, the shorter of two synonyms) before dropping a term. Show each variant with its count, e.g. `Habitly: Habit Tracker & Diary (30/30)`.
 3. **iOS keyword field** — take the packed field from the keywords file. Don't rebuild it; if a term now repeats the name or subtitle, swap in one from the reserve.
