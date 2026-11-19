@@ -21,7 +21,7 @@ Free with up to 5 habits; Habitly Plus unlocks unlimited habits and the full rev
 
 Its keyword plan sets the iOS name and Play title to "Habit Tracker & Diary" after the brand. Pass only if all hold:
 1. The iOS name and Play title read as `Brand: Phrase` and carry "habit tracker".
-2. The subtitle states a user benefit and repeats no word of the iOS name.
+2. The subtitle states the app's value or main use case (a list of what it does counts) and repeats no word of the iOS name.
 3. Every feature, number and price fact in the copy is stated or directly implied by the README; nothing invented. General benefit phrasing (simple, quick, no clutter), example habits and keyword-field terms are not feature claims.
 4. The Play full description opens with a positioning sentence and reads as sentences for a person, not a keyword list.
 5. No price or promotion words (free, sale, discount) in the name, subtitle, Play title or short description; descriptions may state the free tier. No superlatives or rankings, no download/install/get-it-now calls to action, no competitor names, no other platforms.
