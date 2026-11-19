@@ -10,6 +10,7 @@ Store facts and method the aso-kit skills reason from. Skills cite these files; 
 | `ranking.md` | How each store ranks, AI surfaces (Tags, Ask Play, LLM search) |
 | `keyword-method.md` | Seed → expand → score, volume proxies, tool metrics, thresholds |
 | `copy.md` | How to write each field, AI-readable positioning, screenshot captions |
+| `length-and-packing.md` | What each character buys: separators, free indexed words, what folds (plurals, accents, compounds, misspellings), expansion ratios |
 | `localization.md` | Per-language research, iOS storefront × locale indexing table |
 | `endpoints.md` | Unofficial store endpoints, request shapes, probe status |
 | `myths.md` | Contested claims and recycled stats — what not to repeat |
