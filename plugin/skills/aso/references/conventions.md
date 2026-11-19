@@ -17,7 +17,7 @@ One folder, `aso/`, at the project root. No dates in file names; each file opens
 | `aso/metadata-<locale>.md` | `/aso-metadata`, `/aso-localize` | paste-ready fields with lengths, the release plan |
 | `aso/screenshot-brief.md` | `/aso-metadata`, on request | the slide brief — format in `screenshot-brief.md` |
 | `aso/audit.md` | `/aso-audit` | scorecard, findings, measurement plan |
-| `aso/changelog.md` | `/aso-metadata` appends, `/aso-audit` updates status and result | one row per copy change per locale — the source `/aso-localize` gates on |
+| `aso/changelog.md` | `/aso-metadata` and `/aso-release` (promotional text) append, `/aso-audit` updates status and result | one row per copy change per locale — the source `/aso-localize` gates on |
 | `aso/release.md` | `/aso-release` | this release: commits, What's New and Play notes per locale, promotional text proposal |
 | `aso/releases.md` | `/aso-release` appends | one row per release — where the next release's commits start |
 
@@ -43,6 +43,7 @@ All read-only except where noted; all need Node ≥ 18.
 |---|---|
 | `scripts/store.mjs` | `suggest`, `search`, `lookup`, `top` for both stores; `probe` checks every call |
 | `scripts/check.mjs <metadata.json \| keywords-<locale>.md>` | grades fields, or a keyword plan, against `knowledge/limits.json`. Exit 1 = errors. Never ship with errors |
+| `scripts/check.mjs aso/` | line budgets, and the rows of `changelog.md` and `releases.md` |
 | `scripts/store.mjs match` | whether a store folds two spellings into one word |
 | `scripts/drift.mjs` | lints the knowledge base (`/aso-refresh`) |
 
