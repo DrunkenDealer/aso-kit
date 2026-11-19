@@ -41,7 +41,7 @@ Relevance gate, then volume, difficulty and relevance 1–3 each, opportunity = 
 
 Cluster and place per `keyword-method.md` § 4: head term → name / title, second cluster → subtitle / short description, everything else → the iOS keyword field and the Play full description.
 
-**Pack the iOS keyword field once, here.** Single words, comma-separated, no spaces, none of the words planned for the name or subtitle, no plural of a word already in, no banned word from `limits.json`, filled to ≥ 90 of 100 characters:
+**Pack the iOS keyword field once, here.** Single words, comma-separated, no spaces, none of the words planned for the name or subtitle, no developer or category words, in English no plural of a word already in, no misspellings unless iOS autocomplete shows them, no banned word from `limits.json` (the rest of the packing rules: `../aso/knowledge/length-and-packing.md`), filled to ≥ 90 of 100 characters:
 
 ```
 node -e 'console.log([...process.argv[1]].length)' "<field>"
