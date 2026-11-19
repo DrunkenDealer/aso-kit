@@ -6,7 +6,7 @@ Paths are relative to the `aso` skill folder; from any other skill, prefix `../a
 
 ## Output
 
-One folder, `aso/`, at the project root. No dates in file names; each file opens with its own date line. Re-running a skill overwrites its file — git keeps the history.
+One folder, `aso/`, at the project root. No dates in file names; each file opens with its own date line. Re-running a skill overwrites its file — git keeps the history. The exception is `aso/changelog.md`: append-only, the record of what shipped where and how it did.
 
 | File | Written by | Holds |
 |---|---|---|
@@ -17,6 +17,7 @@ One folder, `aso/`, at the project root. No dates in file names; each file opens
 | `aso/metadata-<locale>.md` | `/aso-metadata`, `/aso-localize` | paste-ready fields with lengths, the release plan |
 | `aso/screenshot-brief.md` | `/aso-metadata`, on request | the slide brief — format in `screenshot-brief.md` |
 | `aso/audit.md` | `/aso-audit` | scorecard, findings, measurement plan |
+| `aso/changelog.md` | `/aso-metadata` appends, `/aso-audit` updates status and result | one row per copy change per locale — the source `/aso-localize` gates on |
 
 Line budgets — short is the point; `node ../aso/scripts/check.mjs aso/` flags a file over its budget:
 
@@ -66,6 +67,24 @@ Copy is keyed by **locale** (`en-US`, `de-DE`, `pt-BR`); store calls by **storef
 Optional lists, graded item by item when present: `ios.events` `[{name, short, long}]`, `ios.iaps` `[{name, description}]`, `ios.customProductPages` `[{promotionalText}]`, `play.tags` `["…"]`, `play.promotionalContent` `[{title, description}]`.
 
 A store the app isn't on is omitted. A field left out is not graded. Name, subtitle, Play title and short description warn below 90% of their limit: indexed space left empty is ranking left unclaimed. `competitors` are the names `check.mjs` must never see in the copy.
+
+## Changelog
+
+```markdown
+> aso changelog · all
+
+| Date | Locale | Stores | Fields | Change | Built on | Status | Result |
+|---|---|---|---|---|---|---|---|
+| 2026-11-19 | en-US | ios, play | name, subtitle, keywords | first keyword-targeted copy | — | live 2026-11-21 | 2026-12-19: "habit tracker" 48 → 21 |
+| 2027-01-05 | de-DE | ios, play | all | new locale | en-US 2026-11-19 | ready | — |
+```
+
+- **Date** — when the copy was written. **Built on** — for a non-primary locale, the primary's row date it was written from; `—` for the primary.
+- **Status** — `ready` (written, not in the store), `live YYYY-MM-DD`, or `dropped`. The developer or `/aso-audit` sets `live`.
+- **Result** — filled once the window has passed: iOS ~4 weeks, Play 6–8 weeks after `live` (`knowledge/ranking.md`). Rank of the head term before → after, conversion if known.
+- The primary locale is `en-US` unless the app has no English listing; it is the first locale in the file.
+
+`check.mjs aso/` checks the table: eight cells, ISO dates, a valid status.
 
 ## State block
 

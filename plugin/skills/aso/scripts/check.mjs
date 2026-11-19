@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Grades a metadata.json, or a keywords-<locale>.md plan, against store limits and policy in ../knowledge/limits.json.
 //   node check.mjs <metadata.json | keywords-<locale>.md> [--json]
-//   node check.mjs aso/ — line budgets of the md outputs (conventions.md)
+//   node check.mjs aso/ — line budgets of the md outputs, and aso/changelog.md (conventions.md)
 // Exit 0 clean or warnings only, 1 on any error, 2 on bad input.
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -22,7 +22,32 @@ if (statSync(file).isDirectory()) {
     if (max && n > max) over++, console.log(`! ${f}: ${n}/${max} lines`);
   }
   if (!over) console.log("✓ every file within its line budget");
-  process.exit(0);
+  const log = join(file, "changelog.md");
+  process.exit(existsSync(log) ? changelog(readFileSync(log, "utf8")) : 0);
+}
+
+// aso/changelog.md (conventions.md § Changelog): row format, and locales built on an older primary.
+function changelog(md) {
+  const date = /^\d{4}-\d{2}-\d{2}$/;
+  const rows = md.split("\n").filter((l) => /^\|\s*\d/.test(l)).map((l) => l.split("|").slice(1, -1).map((c) => c.trim()));
+  let bad = 0;
+  for (const r of rows) {
+    const why =
+      r.length !== 8 ? `${r.length} cells, want 8` :
+      !date.test(r[0]) ? `date "${r[0]}"` :
+      !/^(ready|dropped|live \d{4}-\d{2}-\d{2})$/.test(r[6]) ? `status "${r[6]}"` :
+      r[5] !== "—" && !/^\S+ \d{4}-\d{2}-\d{2}$/.test(r[5]) ? `built on "${r[5]}"` : null;
+    if (why) bad++, console.log(`✗ changelog.md ${r[0]} ${r[1] ?? ""}: ${why}`);
+  }
+  if (bad) return 1;
+  const primary = rows[0]?.[1];
+  const live = rows.filter((r) => r[1] === primary && r[6].startsWith("live")).map((r) => r[0]).sort().at(-1);
+  const latest = new Map();
+  for (const r of rows) if (r[1] !== primary && r[6] !== "dropped") latest.set(r[1], r[5].split(" ")[1]);
+  for (const [locale, built] of latest)
+    if (live && built < live) console.log(`! changelog.md ${locale}: built on ${primary} ${built}, ${primary} live since ${live} — stale`);
+  if (rows.length) console.log(`✓ changelog.md ${rows.length} rows`);
+  return 0;
 }
 const sibling = (name) => join(dirname(file), name);
 const plan = file.endsWith(".md") ? readFileSync(file, "utf8") : null;

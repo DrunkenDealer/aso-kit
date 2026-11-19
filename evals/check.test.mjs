@@ -78,3 +78,19 @@ test("line budgets flag an overlong output file", async () => {
   const r = spawnSync("node", [join(here, "../plugin/skills/aso/scripts/check.mjs"), dir], { encoding: "utf8" });
   assert.equal(r.stdout.trim(), "! keywords-de-DE.md: 41/40 lines");
 });
+
+const dir = (fixture) => spawnSync("node", [join(here, "../plugin/skills/aso/scripts/check.mjs"), join(here, "fixtures", fixture)], { encoding: "utf8" });
+
+test("the changelog flags a locale built on an older primary", () => {
+  const r = dir("aso-dir");
+  assert.equal(r.status, 0);
+  assert.match(r.stdout, /! changelog\.md de-DE: built on en-US 2026-08-01, en-US live since 2026-10-20 — stale/);
+  assert.doesNotMatch(r.stdout, /fr-FR/);
+});
+
+test("the changelog fails on a malformed row", () => {
+  const r = dir("aso-dir-bad");
+  assert.equal(r.status, 1);
+  assert.match(r.stdout, /✗ changelog\.md 2026-11-01 fr-FR: status "shipped"/);
+  assert.match(r.stdout, /✗ changelog\.md 11\/02\/2026 es-MX: 7 cells, want 8/);
+});
