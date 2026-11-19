@@ -6,6 +6,21 @@ Keywords don't translate. Research each market natively: local autocomplete, the
 - Prioritise markets with existing organic traction; roll out in phases. [practitioner](https://www.apptweak.com/en/aso-blog/guide-to-app-store-localization) · 2026-11-19
 - AI discovery features run in US English first, so localized markets still run on classic keyword ASO. [practitioner](https://www.apptweak.com/en/aso-blog/google-i-o-2026-aso-updates) · 2026-11-19
 
+## Sequencing
+
+- Spreading effort across many languages gives "15 half-baked localizations instead of two or three good ones"; pick one or two markets, get downloads and reviews there, then expand. [practitioner](https://appopportunity.com/blog/app-localization-mistakes) · 2026-11-19
+- Machine-translated copy comes out grammatically correct but not natural, and native speakers notice; one native review pass is the fix. [practitioner](https://appopportunity.com/blog/app-localization-mistakes) · 2026-11-19
+- "Do not start with 30 languages because the tool can do it"; pilot one locale end to end and treat it as a launch experiment, tracked per locale. [practitioner](https://www.applaunchflow.com/blog/how-to-localize-an-app) · 2026-11-19
+- Research a short list of countries, test one first, track it for at least one ASO cycle, then keep, improve or drop it — "better than translating ten listings and hoping one works". [practitioner](https://appsprint.app/blog/app-store-localization-aso) · 2026-11-19
+- Change one element per update cycle; ranking shifts show in 7–14 days, download data needs ~30 days, and readings in the first 3–5 days mislead. [practitioner](https://foxdata.com/en/blogs/how-to-use-aso-impact-analysis-to-measure-keyword-changes/) · 2026-11-19
+
+What these sources warn against is localizing many markets at once by machine translation, without research and without measuring — not localization itself. Our sequence:
+
+1. The primary locale (`en-US` unless the app has no English listing) ships first and is measured for a full window (`ranking.md`: iOS ~4 weeks, Play 6–8 weeks).
+2. Then one more locale, researched in its own language and reviewed by a native speaker, built from the primary's live copy. Its window runs before the next locale starts.
+3. When the primary changes, locales built on the older version are stale; update them one at a time, the same way.
+4. `aso/changelog.md` records each step, so the gate in `/aso-localize` and `/aso-audit` can tell what is live, what is still in its window, and what is stale.
+
 ## App Store: storefronts index more than one locale
 
 If you add a language, users "can search for your app using localized keywords in all countries or regions where the App Store supports" it. New localizations don't inherit keywords from the primary language. Each extra indexed locale adds 160 characters of searchable text (30 + 30 + 100).
