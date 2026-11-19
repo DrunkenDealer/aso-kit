@@ -1,6 +1,6 @@
 # Store endpoints
 
-None of these are documented APIs except iTunes Search/Lookup. They can change without notice. `/aso-refresh` re-probes them; if a probe fails, fall back to asking the user to paste the listing.
+None of these are documented APIs except iTunes Search/Lookup. They can change without notice. `../scripts/store.mjs` implements every call below and `store.mjs probe` re-checks them all; if a probe fails, fall back to asking the user to paste the listing.
 
 ## App Store
 
@@ -9,7 +9,8 @@ None of these are documented APIs except iTunes Search/Lookup. They can change w
 GET https://itunes.apple.com/lookup?id=<id>&country=<cc>
 GET https://itunes.apple.com/lookup?bundleId=<bundle>&country=<cc>
 ```
-- Works; JSON `{resultCount, results[]}` with `trackName, description, releaseNotes, sellerName, primaryGenreName, averageUserRating, userRatingCount, screenshotUrls, version`. **No `subtitle`** — scrape apps.apple.com or ask. [probe](https://itunes.apple.com/lookup?id=284882215&country=us) · 2026-11-19
+- Works; JSON `{resultCount, results[]}` with `trackName, description, releaseNotes, sellerName, primaryGenreName, averageUserRating, userRatingCount, screenshotUrls, version`. **No `subtitle`**. [probe](https://itunes.apple.com/lookup?id=284882215&country=us) · 2026-11-19
+- The subtitle is the `<p class="subtitle…">` right after the `<h1>` on `apps.apple.com/<cc>/app/id<id>` (301 → follow). Other `"subtitle"` keys on that page belong to events and other apps. Rapid repeats return 429. [probe](https://apps.apple.com/us/app/id284882215) · 2026-11-19
 - Rate limit "approximately 20 calls per minute". [official](https://performance-partners.apple.com/search-api) · 2026-11-19
 
 **Search** — candidate competitors. The result order is **not** the App Store's ranking.
@@ -45,7 +46,7 @@ GET https://itunes.apple.com/<cc>/rss/customerreviews/page=1/id=<id>/sortby=most
 ```
 GET https://play.google.com/store/apps/details?id=<pkg>&hl=<lang>&gl=<cc>
 ```
-- Works; about 1.3 MB; returns 404 for unknown ids. [probe](https://play.google.com/store/apps/details?id=com.spotify.music&hl=en&gl=US) · 2026-11-19
+- Works; about 1.3 MB; returns 404 for unknown ids. The full description is `data-g-id="description"`, What's New the last `itemprop="description"`. [probe](https://play.google.com/store/apps/details?id=com.spotify.music&hl=en&gl=US) · 2026-11-19
 
 **Search** — the order of `details?id=` links in the HTML is the result order.
 ```
@@ -64,5 +65,5 @@ Strip the `)]}'` prefix, take `[0][2]` and JSON-parse it; the suggestions are at
 - Same RPC as google-play-scraper `lib/suggest.js`. [practitioner](https://github.com/facundoolano/google-play-scraper) · 2026-11-19
 - The legacy `market.android.com/suggest/SuggRequest` endpoint is **dead** (404). [probe](https://market.android.com/suggest/SuggRequest?json=1&c=3&query=photo&hl=en&gl=US) · 2026-11-19
 
-**Top charts** — RPC `vyAe2` only works with the full payload from google-play-scraper `lib/list.js` (`topselling_free`, `topselling_paid`, `topgrossing`, plus a category). The category page `store/apps/category/<CAT>` is a usable unranked fallback. The old `/store/apps/top/category/…` URLs redirect.
+**Top charts** — RPC `vyAe2` only works with the full ~15 KB payload from google-play-scraper `lib/list.js` (`topselling_free`, `topselling_paid`, `topgrossing`, plus a category), so `store.mjs` reads the category page `store/apps/category/<CAT>` instead: Play's picks, unranked. For keyword work, search order (above) is the ranking that matters. The old `/store/apps/top/category/…` URLs redirect.
 - `vyAe2` with the full payload returns 50 package ids. [probe](https://play.google.com/_/PlayStoreUi/data/batchexecute?rpcids=vyAe2) · 2026-11-19
