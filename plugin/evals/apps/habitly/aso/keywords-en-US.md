@@ -9,9 +9,8 @@
 |---|---|---|---|---|---|---|---|
 | habit tracker | 3 | 3 | 3 | 12 | name | title | suggest, 2/2 competitors |
 | habit diary | 1 | 1 | 3 | 12 | name | title | suggest |
-| routine planner | 2 | 2 | 3 | 12 | subtitle | short | suggest |
 | reminders | 2 | 2 | 2 | 8 | subtitle | short | suggest, repo |
-| daily routine | 3 | 3 | 3 | 12 | field | full | suggest |
+| daily routine | 3 | 3 | 3 | 12 | subtitle | short | suggest |
 | streak | 2 | 2 | 3 | 12 | field | full | suggest, repo |
 | checklist | 2 | 2 | 3 | 12 | field | full | suggest, repo |
 | widget | 1 | 2 | 3 | 9 | field | full | repo |
@@ -22,13 +21,14 @@
 | water | 2 | 2 | 1 | 4 | field | full | suggest |
 | sleep | 2 | 3 | 1 | 3 | field | full | suggest |
 | motivation | 2 | 3 | 2 | 6 | field | full | suggest |
+| focus | 2 | 3 | 1 | 3 | field | full | suggest |
 
 ## Placement
-- **iOS name:** Habit Tracker & Diary · **subtitle:** Routine Planner & Reminders
+- **iOS name:** Habit Tracker & Diary · **subtitle:** daily routine, reminders
 - **Play title:** Habit Tracker & Diary · **short description:** daily routine, reminders
 
 ## iOS keyword field (96/100 chars)
-`streak,journal,mood,self,care,productivity,checklist,water,sleep,morning,daily,motivation,widget`
+`streak,journal,mood,self,care,productivity,checklist,water,sleep,morning,focus,motivation,widget`
 
 ## Reserve
-todo, goals, focus
+todo, goals, planner

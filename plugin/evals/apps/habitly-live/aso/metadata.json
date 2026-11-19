@@ -8,8 +8,8 @@
       "primaryKeyword": "habit tracker",
       "ios": {
         "name": "Habitly: Habit Tracker & Diary",
-        "subtitle": "Routine Planner & Reminders",
-        "keywords": "streak,journal,mood,self,care,productivity,checklist,water,sleep,morning,daily,motivation,widget",
+        "subtitle": "Daily Routine with Reminders",
+        "keywords": "streak,journal,mood,self,care,productivity,checklist,water,sleep,morning,focus,motivation,widget",
         "promotionalText": "Check off today's habits in one tap, and every Sunday see which ones stuck and which slipped.",
         "description": "Habitly is a habit tracker that helps busy people build routines that last.\n\n• Today: the day's habits as a checklist\n• Streak calendar: every day you kept a habit\n• Weekly review: which habits stuck and which slipped\n• Reminders at the time you usually do the habit\n• Widgets and a one-line mood note\n\nFree with up to 5 habits; Habitly Plus unlocks unlimited habits and the full review history.",
         "whatsNew": "First release: a daily habit checklist, a streak calendar and a weekly review."
