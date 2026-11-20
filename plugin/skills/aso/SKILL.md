@@ -19,7 +19,7 @@ Read `references/conventions.md` first: output paths, the state block, the conso
 | 1 | `/aso-context` | the repo | `aso/context.md`, live snapshots |
 | 2 | `/aso-keywords <locale>` | context | `aso/keywords-<locale>.md` |
 | 3 | `/aso-metadata <locale>` | context, keywords | `aso/metadata.json`, `aso/metadata-<locale>.md`, optional `aso/screenshot-brief.md` |
-| 4 | `/aso-audit` | a live listing, or `aso/metadata.json` | `aso/audit.md` |
+| 4 | `/aso-audit draft` | `aso/metadata.json` | `aso/audit.md` |
 | later, on request | `/aso-localize <locale>` | steps 1–3 live and measured in the primary locale | the same files for one more locale |
 | every release | `/aso-release` | git history; `aso/metadata.json` for live locales | What's New and Play notes, `aso/release.md`, a row in `aso/releases.md` |
 | maintenance | `/aso-refresh` | — | an updated knowledge base |
@@ -29,7 +29,7 @@ Screenshots are not a step. `/aso-metadata` writes a brief; `/vitrine-deck` buil
 ## Process
 
 1. **Where are we.** No `aso/context.md` → start at `/aso-context`. Otherwise start at the first state line that is `—` or older than the line before it (keywords newer than metadata means metadata is stale).
-2. **Run through.** Invoke each step from there to `/aso-audit` with the Skill tool, in order, and let it finish — its own console lines are the report. Never ask between steps or whether to run the next one; the run ends when steps 1–4 are filled for the primary locale (`en-US` unless the app has no English listing). Never offer localization: it is a separate step, run later, one locale at a time, when the developer asks.
+2. **Run through.** Invoke each step from there to `/aso-audit draft` with the Skill tool, in order, and let it finish — its own console lines are the report. Never ask between steps or whether to run the next one; the run ends when steps 1–4 are filled for the primary locale (`en-US` unless the app has no English listing). Never offer localization: it is a separate step, run later, one locale at a time, when the developer asks.
 3. **Done:**
    ```
    aso · <app> · text ASO done for <primary locale>
