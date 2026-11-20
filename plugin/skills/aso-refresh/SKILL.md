@@ -37,7 +37,7 @@ Show the Drifted, Unverifiable and New rows as a table (file, old, new, source).
 - A failed probe: fix `store.mjs` if the new shape is clear; otherwise mark it failing in `endpoints.md`.
 - `node ../aso/scripts/drift.mjs` must pass.
 
-Run outside an aso-kit checkout (an installed plugin is overwritten on update): write the patch to `aso/refresh-YYYY-MM-DD.md` instead and point at https://github.com/DrunkenDealer/claude-code-aso-kit/issues.
+Run outside an aso-kit checkout (an installed plugin is overwritten on update): write the patch to `aso/refresh-YYYY-MM-DD.md` instead and point at https://github.com/DrunkenDealer/aso-kit/issues.
 
 ## Console
 
