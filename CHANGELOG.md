@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.0 — 2026-11-20
+
+- `/aso` runs context → keywords → metadata → audit without asking between steps, and audits the new draft at the
+  end instead of the live copy it replaced.
+- No step asks about markets or translations, or offers localization: the listing starts in the primary locale
+  only. `/aso-localize` runs when you ask for it.
+- `aso-keywords` judges the live name, subtitle, Play title and short description against the scored targets, and
+  `aso-metadata` builds on that live copy instead of writing from scratch. Keyword files get 50 lines.
+- `aso-metadata` writes the screenshot brief without asking and leaves `/vitrine-deck` to you.
+
 ## 1.1.0 — 2026-11-20
 
 - The checker and store reads move out of the plugin into the `aso-kit` CLI
