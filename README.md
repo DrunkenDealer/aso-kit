@@ -1,5 +1,7 @@
 # ASO Kit: App Store and Google Play text ASO for Claude Code
 
+![ASO Kit: App Store and Google Play text ASO from your repo, every field graded before you paste it](assets/social-preview.png)
+
 **ASO Kit is a Claude Code plugin for the text side of App Store Optimization.** It reads your app's repo and the
 live stores, researches keywords per market, writes the title, subtitle, keyword field and descriptions for both
 stores, and grades every field against store limits and policy before you paste it.
