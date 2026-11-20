@@ -13,6 +13,8 @@ Every store fact it reasons from is sourced and dated — official docs first, p
 such, contested claims marked **Disputed** — so you can see why it says what it says, and re-check it when the
 stores change.
 
+Why and how it works, in short: [ASO Kit: App Store and Google Play text ASO with Claude Code](https://mashlab.app/blog/claude-code-aso-kit/).
+
 ## Install
 
 ```
