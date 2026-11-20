@@ -2,7 +2,7 @@
 
 Every indexed character counts, and every locale has to fit the same limits in its own words. This file holds what each character buys: what the stores fold together, what they index for free, and how much text grows in translation.
 
-`probe` bullets are our own `store.mjs match` runs. They show how much the top 25 results of two queries overlap (≥ 0.7 same, ≤ 0.3 different). On iOS the probe uses the iTunes Search API, which only approximates in-app search.
+`probe` bullets are our own `aso-kit store match` runs. They show how much the top 25 results of two queries overlap (≥ 0.7 same, ≤ 0.3 different). On iOS the probe uses the iTunes Search API, which only approximates in-app search.
 
 ## Budgets
 
@@ -50,7 +50,7 @@ Every indexed character counts, and every locale has to fit the same limits in i
 
 ## Packing guidance
 
-No source shows the separator choice affecting rank, and nothing settles whether ü/ue, ё/е or Chinese and Korean segmentation fold in in-app search. Derived from the facts above; `check.mjs` enforces the countable ones.
+No source shows the separator choice affecting rank, and nothing settles whether ü/ue, ё/е or Chinese and Korean segmentation fold in in-app search. Derived from the facts above; `aso-kit check` enforces the countable ones.
 
 1. **Separators.** `Brand: Phrase` costs 2, `Brand - Phrase` 3. Use the colon unless the brand already reads with a dash.
 2. **"&" for "and".** Saves 2 characters. Play matches the two; iOS only partly. On iOS keep "and" when "x and y" is itself a target query, otherwise use "&".

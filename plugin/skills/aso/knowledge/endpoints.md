@@ -1,6 +1,6 @@
 # Store endpoints
 
-None of these are documented APIs except iTunes Search/Lookup. They can change without notice. `../scripts/store.mjs` implements every call below and `store.mjs probe` re-checks them all; if a probe fails, fall back to asking the user to paste the listing.
+None of these are documented APIs except iTunes Search/Lookup. They can change without notice. `aso-kit store` implements every call below and `aso-kit store probe` re-checks them all; if a probe fails, fall back to asking the user to paste the listing.
 
 ## App Store
 
@@ -18,7 +18,7 @@ GET https://itunes.apple.com/lookup?bundleId=<bundle>&country=<cc>
 GET https://itunes.apple.com/search?term=<q>&entity=software&country=<cc>&limit=50
 ```
 - Works; caps at ~200 results. [probe](https://itunes.apple.com/search?term=habit+tracker&entity=software&country=us&limit=3) · 2026-11-19
-- `store.mjs match` compares the top 25 for two spellings. Identical queries score 0.9–1.0 on both stores and unrelated terms 0, so ≥ 0.7 reads as "folded" and ≤ 0.3 as "different". On iOS this is the Search API's engine, a proxy for in-app search, not the same thing. [probe](https://itunes.apple.com/search?term=habit+tracker&entity=software&country=us&limit=25) · 2026-11-19
+- `aso-kit store match` compares the top 25 for two spellings. Identical queries score 0.9–1.0 on both stores and unrelated terms 0, so ≥ 0.7 reads as "folded" and ≤ 0.3 as "different". On iOS this is the Search API's engine, a proxy for in-app search, not the same thing. [probe](https://itunes.apple.com/search?term=habit+tracker&entity=software&country=us&limit=25) · 2026-11-19
 
 **Search hints (autocomplete)** — needs the storefront header, or it returns an empty list.
 ```
@@ -66,5 +66,5 @@ Strip the `)]}'` prefix, take `[0][2]` and JSON-parse it; the suggestions are at
 - Same RPC as google-play-scraper `lib/suggest.js`. [practitioner](https://github.com/facundoolano/google-play-scraper) · 2026-11-19
 - The legacy `market.android.com/suggest/SuggRequest` endpoint is **dead** (404). [probe](https://market.android.com/suggest/SuggRequest?json=1&c=3&query=photo&hl=en&gl=US) · 2026-11-19
 
-**Top charts** — RPC `vyAe2` only works with the full ~15 KB payload from google-play-scraper `lib/list.js` (`topselling_free`, `topselling_paid`, `topgrossing`, plus a category), so `store.mjs` reads the category page `store/apps/category/<CAT>` instead: Play's picks, unranked. For keyword work, search order (above) is the ranking that matters. The old `/store/apps/top/category/…` URLs redirect.
+**Top charts** — RPC `vyAe2` only works with the full ~15 KB payload from google-play-scraper `lib/list.js` (`topselling_free`, `topselling_paid`, `topgrossing`, plus a category), so `aso-kit store` reads the category page `store/apps/category/<CAT>` instead: Play's picks, unranked. For keyword work, search order (above) is the ranking that matters. The old `/store/apps/top/category/…` URLs redirect.
 - `vyAe2` with the full payload returns 50 package ids. [probe](https://play.google.com/_/PlayStoreUi/data/batchexecute?rpcids=vyAe2) · 2026-11-19

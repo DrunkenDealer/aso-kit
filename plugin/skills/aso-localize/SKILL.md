@@ -41,7 +41,7 @@ Say which job this locale has, and for a slot which storefronts it reaches.
 
 1. Run `/aso-keywords <locale>` with the Skill tool. Seeds come from that market's language and its own competitors — never a translation of the primary list.
 2. For a cross-localization slot, its keyword field must not repeat a word from the default locale's name, subtitle or keywords in the same storefront: those are already indexed there.
-3. Run `/aso-metadata <locale>`. It grades with `check.mjs`, which applies the locale's banned words (`limits.json` → `banned.locale`), then with `aso-verifier`; for a slot or an additional iOS language, tell it so, so rubric item 10 applies.
+3. Run `/aso-metadata <locale>`. It grades with `aso-kit check`, which applies the locale's banned words (`limits.json` → `banned.locale`), then with `aso-verifier`; for a slot or an additional iOS language, tell it so, so rubric item 10 applies.
 
 The copy is written fresh in the locale's language to its own limits — never the English copy translated and trimmed. A 30-character English field grows 60–80% in most European languages, and German fills the subtitle hardest (`length-and-packing.md`). Where two local words mean the same, take the one autocomplete shows, then the shorter.
 
@@ -50,7 +50,7 @@ Market notes worth checking:
 - **de, nl** — compounds partly match their split form; use the compound in the name and add the head noun alone to the keyword field. `ue` for `ü` is a different query.
 - **pt-BR vs pt-PT, es-MX vs es-ES** — separate vocabularies; on iOS separate storefronts.
 - **ja, ko, zh** — no spaces between words; the keyword field counts characters, so one CJK character costs 1 and the field holds about twice as many terms. Kana and kanji fold; romaji doesn't on Play.
-- **uk, ru** — Ukraine's storefront indexes both, and many Ukrainian users search in Russian. Write Ukrainian copy; take a Russian term only for the keyword field, and only if autocomplete in `--cc ua` shows it. Ukrainian words that look Russian (і/и, є/е, ї) are different queries until a `store.mjs match` probe says otherwise.
+- **uk, ru** — Ukraine's storefront indexes both, and many Ukrainian users search in Russian. Write Ukrainian copy; take a Russian term only for the keyword field, and only if autocomplete in `--cc ua` shows it. Ukrainian words that look Russian (і/и, є/е, ї) are different queries until a `aso-kit store match` probe says otherwise.
 - **hi** — check autocomplete for Latin-script (Hinglish) and English queries in `--cc in` as well and compare their suggestions with the Devanagari ones. Keep the copy in Devanagari; a Latin-script term goes in the keyword field.
 - **ar** — right to left; the brand stays in Latin script, so name and title mix directions — read them as they render, brand first or last but never splitting the phrase. Arabic text runs ~0.83 of English (`length-and-packing.md`), so the fields fill more easily than in European languages.
 - **Plurals** — outside English both stores treat them as separate queries (`length-and-packing.md`); put the suggested form in name or subtitle and the other in the keyword field if it fits.

@@ -1,0 +1,18 @@
+{
+  "name": "aso-kit",
+  "version": "1.1.0",
+  "description": "The aso-kit CLI: grades App Store and Google Play listing copy and reads both stores' public search data, for the ASO Kit Claude Code plugin.",
+  "type": "module",
+  "bin": {
+    "aso-kit": "cli/aso-kit.mjs"
+  },
+  "files": [
+    "cli",
+    "plugin/skills/aso/knowledge"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "private": true
+}

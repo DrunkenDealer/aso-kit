@@ -1,6 +1,6 @@
 # Policy: what gets metadata rejected
 
-The token lists live in `limits.json` (`banned`), and `scripts/check.mjs` applies them per field. This file gives the reasons behind them.
+The token lists live in `limits.json` (`banned`), and `aso-kit check` applies them per field. This file gives the reasons behind them.
 
 ## App Store
 

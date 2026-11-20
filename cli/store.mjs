@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Public App Store and Google Play reads for ASO research. Prints JSON. Endpoints and caveats: ../knowledge/endpoints.md
+// Public App Store and Google Play reads for ASO research. Prints JSON. Endpoints and caveats: plugin/skills/aso/knowledge/endpoints.md
 //   store.mjs suggest ios|play <term> [--cc us] [--lang en]
 //   store.mjs search  ios|play <term> [--cc us] [--lang en] [--limit 25]
 //   store.mjs lookup  ios <id|bundleId> | play <package> [--cc us] [--lang en]

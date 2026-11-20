@@ -16,8 +16,8 @@ Writes `aso/audit.md`. Paths, gates, console: `../aso/references/conventions.md`
 - Otherwise the live listing, per store and locale in `aso/context.md` (primary if no context):
 
   ```
-  node ../aso/scripts/store.mjs lookup ios <id> --cc <cc> > aso/snapshots/ios-<cc>.json
-  node ../aso/scripts/store.mjs lookup play <package> --cc <cc> --lang <lang> > aso/snapshots/play-<cc>.json
+  aso-kit store lookup ios <id> --cc <cc> > aso/snapshots/ios-<cc>.json
+  aso-kit store lookup play <package> --cc <cc> --lang <lang> > aso/snapshots/play-<cc>.json
   ```
 
   Map the snapshot into the `metadata.json` schema in `aso/snapshots/live.json` — `name`, `subtitle`, `description`, `whatsNew`; `title`, `shortDescription`, `fullDescription`, `releaseNotes` ← `whatsNew`. The keyword field and promotional text aren't public: take them from `fastlane/metadata/` if present, otherwise mark them unaudited.
@@ -25,7 +25,7 @@ Writes `aso/audit.md`. Paths, gates, console: `../aso/references/conventions.md`
 ## 2. Grade
 
 ```
-node ../aso/scripts/check.mjs aso/snapshots/live.json --json
+aso-kit check aso/snapshots/live.json --json
 ```
 
 Then judge what the checker can't, field by field, against `copy.md` and `keyword-method.md`:
@@ -45,7 +45,7 @@ Score each row ✓ / ! / ✗. No 0–100 total — a weighted score implies fiel
 
 ## 3. Write `aso/audit.md`
 
-At most 50 lines; `node ../aso/scripts/check.mjs aso/` must report it within budget.
+At most 50 lines; `aso-kit check aso/` must report it within budget.
 
 ```markdown
 > aso-audit · <locale> · YYYY-MM-DD · <live | draft>
@@ -76,8 +76,8 @@ Each fix names the field, the problem, and the replacement or the skill that wri
 Then `aso/changelog.md`, if it exists:
 
 - A `ready` row whose copy matches the live listing → set it `live` with the date the developer gives (ask once; today if unknown).
-- A `live` row past its window (iOS ~4 weeks, Play 6–8 weeks) with an empty Result → fill it: head-term rank before → now from `store.mjs search`, conversion if the developer has it.
-- `node ../aso/scripts/check.mjs aso/` reporting a locale `stale` → a **Next cycle** fix: "update <locale> from the current <primary> with `/aso-localize <locale>`". Never rewrite it here.
+- A `live` row past its window (iOS ~4 weeks, Play 6–8 weeks) with an empty Result → fill it: head-term rank before → now from `aso-kit store search`, conversion if the developer has it.
+- `aso-kit check aso/` reporting a locale `stale` → a **Next cycle** fix: "update <locale> from the current <primary> with `/aso-localize <locale>`". Never rewrite it here.
 
 Update the state line `Audit`.
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Grades a metadata.json, or a keywords-<locale>.md plan, against store limits and policy in ../knowledge/limits.json.
+// Grades a metadata.json, or a keywords-<locale>.md plan, against store limits and policy in plugin/skills/aso/knowledge/limits.json.
 //   node check.mjs <metadata.json | keywords-<locale>.md> [--json]
 //   node check.mjs aso/ — line budgets of the md outputs, aso/changelog.md and aso/releases.md (conventions.md)
 // Exit 0 clean or warnings only, 1 on any error, 2 on bad input.
@@ -7,7 +7,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const L = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), "../knowledge/limits.json"), "utf8"));
+const L = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), "../plugin/skills/aso/knowledge/limits.json"), "utf8"));
 const [file, flag] = process.argv.slice(2);
 if (!file) {
   console.error("usage: check.mjs <metadata.json | keywords-<locale>.md | aso/> [--json]");

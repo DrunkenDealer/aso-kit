@@ -12,8 +12,8 @@ Keeps `../aso/knowledge/` true. Claim format and evidence tags: `../aso/knowledg
 
 ## 1. Check
 
-1. `node ../aso/scripts/drift.mjs` — malformed or stale bullets, `limits.json` disagreeing with the tables.
-2. `node ../aso/scripts/store.mjs probe` — every endpoint in `endpoints.md`.
+1. `aso-kit drift` — malformed or stale bullets, `limits.json` disagreeing with the tables.
+2. `aso-kit store probe` — every endpoint in `endpoints.md`.
 3. For each `- ` bullet with an `official` link: fetch the page, find the claim. Practitioner links only if the claim is the bullet's only evidence.
 4. One `WebSearch` per store for changes since the newest date in `changelog.md`: "App Store Connect release notes", "Google Play Console what's new", plus the latest WWDC / I/O if one happened since.
 
@@ -34,8 +34,8 @@ Show the Drifted, Unverifiable and New rows as a table (file, old, new, source).
 
 - Edit the bullets; Confirmed ones get today's date.
 - A changed limit goes to the table **and** `limits.json` (`verified` too).
-- A failed probe: fix `store.mjs` if the new shape is clear; otherwise mark it failing in `endpoints.md`.
-- `node ../aso/scripts/drift.mjs` must pass.
+- A failed probe: fix `cli/store.mjs` if the new shape is clear; otherwise mark it failing in `endpoints.md`.
+- `node cli/aso-kit.mjs drift` must pass (the checkout's copy, not the installed one).
 
 Run outside an aso-kit checkout (an installed plugin is overwritten on update): write the patch to `aso/refresh-YYYY-MM-DD.md` instead and point at https://github.com/DrunkenDealer/aso-kit/issues.
 

@@ -19,7 +19,7 @@ The first that applies:
 1. The argument: `<from>..<to>`, or `since <date>`.
 2. The last row of `aso/releases.md`: from its `to` commit to `HEAD`.
 3. The last release tag: `git describe --tags --abbrev=0` to `HEAD`.
-4. The live iOS version: `node ../aso/scripts/store.mjs lookup ios <id>` gives `version` and `updated` (its release date); commits since that date.
+4. The live iOS version: `aso-kit store lookup ios <id>` gives `version` and `updated` (its release date); commits since that date.
 
 None applies, or the range holds more than 100 commits → one `AskUserQuestion`: **Since a date** · **Last N commits** · **I'll describe the changes**.
 
@@ -38,12 +38,12 @@ No user-facing change → status `skipped`, notes "Bug fixes and improvements." 
 Primary locale (`en-US` unless the app has no English listing) first:
 
 - Most important change first; one line each; specific — what the user can now do, not what was refactored.
-- A closing line inviting feedback or a review is fine; "download", "update now" and banned words aren't (`check.mjs`).
+- A closing line inviting feedback or a review is fine; "download", "update now" and banned words aren't (`aso-kit check`).
 - Play: ≤ 500 characters per language. iOS: ≤ 4000, but keep it the Play length — same text on both stores unless a change is platform-only.
 
 Then each other locale in `aso/metadata.json`: the same notes in that language, same order, same claims. Platform-only changes go only to that store.
 
-Write them into `aso/metadata.json` (`ios.whatsNew`, `play.releaseNotes`) and run `node ../aso/scripts/check.mjs aso/metadata.json`; fix errors in the notes only — errors in other fields are for `/aso-audit`.
+Write them into `aso/metadata.json` (`ios.whatsNew`, `play.releaseNotes`) and run `aso-kit check aso/metadata.json`; fix errors in the notes only — errors in other fields are for `/aso-audit`.
 
 ## 4. Promotional text (iOS)
 
@@ -64,7 +64,7 @@ Never edit listing copy here.
 `aso/release.md`:
 
 ````markdown
-> aso-release · all · YYYY-MM-DD · <version> · <from>..<to> · check.mjs clean
+> aso-release · all · YYYY-MM-DD · <version> · <from>..<to> · check clean
 
 # Release — <version>
 
@@ -95,7 +95,7 @@ Append to `aso/releases.md` (create it with the header from `conventions.md`): d
 
 `--fastlane`, or a yes to "Write the notes to fastlane?" when `fastlane/metadata/` exists: `fastlane/metadata/<locale>/release_notes.txt` and `fastlane/metadata/android/<code>/changelogs/default.txt`. Headless without the flag: don't write them.
 
-Run `node ../aso/scripts/check.mjs aso/` and fix what it flags. Update the state line `Release`.
+Run `aso-kit check aso/` and fix what it flags. Update the state line `Release`.
 
 ## Console
 

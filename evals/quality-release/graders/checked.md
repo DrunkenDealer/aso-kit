@@ -1,6 +1,6 @@
 ---
 type: regex
 target: {source: file, path: aso/release.md}
-pattern: "check\\.mjs clean"
+pattern: "check clean"
 match: contains
 ---

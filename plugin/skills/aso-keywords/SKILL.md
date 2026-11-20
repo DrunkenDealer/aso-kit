@@ -21,13 +21,13 @@ Needs `aso/context.md`. Without it, read the repo for name, positioning and comp
 Derive `--cc` and `--lang` from the locale first. Then:
 
 ```
-node ../aso/scripts/store.mjs suggest ios "<seed>" --cc <cc>
-node ../aso/scripts/store.mjs suggest play "<seed>" --cc <cc> --lang <lang>
+aso-kit store suggest ios "<seed>" --cc <cc>
+aso-kit store suggest play "<seed>" --cc <cc> --lang <lang>
 ```
 
 Each seed, then seed + space, then the seeds that return 10 suggestions with each of a–z only if the list is still thin. Suggestions that are app names (`brand: …`) are competitor signals, not keywords.
 
-**Competitors.** For each one in context, plus the top 5 of `store.mjs search <store> "<head term>"`: `store.mjs lookup` and note:
+**Competitors.** For each one in context, plus the top 5 of `aso-kit store search <store> "<head term>"`: `aso-kit store lookup` and note:
 
 1. Title shape — `Brand: Phrase`, `Phrase - Brand`, brand only.
 2. The keyword phrase in the title and subtitle / short description.
@@ -35,7 +35,7 @@ Each seed, then seed + space, then the seeds that return 10 suggestions with eac
 
 ## 3. Score
 
-Relevance gate, then volume, difficulty and relevance 1–3 each, opportunity = relevance × (volume + 4 − difficulty), per `keyword-method.md` § 3. Volume on iOS: Apple Ads popularity if the developer pastes it, otherwise suggest rank and how many seeds surface the term. Difficulty: ratings count and exact-match titles in `store.mjs search`. Keep 15–20 targets and a reserve of similar size. Say which inputs were proxies.
+Relevance gate, then volume, difficulty and relevance 1–3 each, opportunity = relevance × (volume + 4 − difficulty), per `keyword-method.md` § 3. Volume on iOS: Apple Ads popularity if the developer pastes it, otherwise suggest rank and how many seeds surface the term. Difficulty: ratings count and exact-match titles in `aso-kit store search`. Keep 15–20 targets and a reserve of similar size. Say which inputs were proxies.
 
 ## 4. Place and pack
 
@@ -73,13 +73,13 @@ node -e 'console.log([...process.argv[1]].length)' "<field>"
 **Table stakes:** … · **White space:** …
 
 ## Reserve
-<terms to swap in when one fails check.mjs or a native reviewer>
+<terms to swap in when one fails `aso-kit check` or a native reviewer>
 ```
 
 Then grade it:
 
 ```
-node ../aso/scripts/check.mjs aso/keywords-<locale>.md
+aso-kit check aso/keywords-<locale>.md
 ```
 
 Fix every `✗` and run again until exit 0: a target without a source, a competitor name, a field word already planned for the name or subtitle. Update the state line `Keywords`.

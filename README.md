@@ -22,6 +22,13 @@ Why and how it works, in short: [ASO Kit: App Store and Google Play text ASO wit
 /plugin install aso-kit@mashlab
 ```
 
+The checker and store reads are a small CLI with no dependencies, installed from this repo (the plugin offers to run this
+the first time it needs it):
+
+```sh
+npm install -g github:DrunkenDealer/aso-kit
+```
+
 Then open your app's repo and ask **"Where do I start with ASO?"** (or `/aso-kit:aso`).
 
 ## Skills
@@ -50,17 +57,17 @@ The brief works for any designer too.
 
 - [`knowledge/`](plugin/skills/aso/knowledge) — field limits, indexing, ranking, policy, keyword method, copy,
   localization, store endpoints, myths, a changelog of store changes. Verified 2026-11-19.
-- [`scripts/check.mjs`](plugin/skills/aso/scripts/check.mjs) — grades a `metadata.json` for limits (keyword field in
+- [`aso-kit check`](cli/check.mjs) — grades a `metadata.json` for limits (keyword field in
   characters), unfilled indexed space, banned words per store and language, competitor names, keyword-field waste, Play
   title rules, description density, and events, IAPs, product pages, tags and promo content; grades a keyword plan
-  for sources and packing; checks line budgets. `node check.mjs aso/metadata.json`
+  for sources and packing; checks line budgets. `aso-kit check aso/metadata.json`
 - [`agents/aso-verifier`](plugin/agents/aso-verifier.md) — a second reader on Haiku: grades the copy against a
   [rubric](plugin/skills/aso/references/rubric.md) (plan applied, true claims, native language, policy tone) with a
   quote per verdict, after the checker passes. For a second language it back-translates the key lines and checks
   they promise what the English does.
-- [`scripts/store.mjs`](plugin/skills/aso/scripts/store.mjs) — autocomplete, search, lookup and charts from both
-  stores' public endpoints. `node store.mjs probe` checks they still work.
-- [`scripts/drift.mjs`](plugin/skills/aso/scripts/drift.mjs) — fails when a fact lacks a source or a date, is older
+- [`aso-kit store`](cli/store.mjs) — autocomplete, search, lookup and charts from both
+  stores' public endpoints. `aso-kit store probe` checks they still work.
+- [`aso-kit drift`](cli/drift.mjs) — fails when a fact lacks a source or a date, is older
   than 180 days, or the limits disagree.
 
 No API keys, no paid tools. Network calls go only to `itunes.apple.com`, `apps.apple.com`, `search.itunes.apple.com`
@@ -68,16 +75,17 @@ and `play.google.com`, carrying the search terms and app ids you research. `/aso
 
 ## Requirements
 
-Claude Code and Node.js 18+.
+Claude Code, Node.js 18+ and the `aso-kit` CLI above.
 
 ## Development
 
 ```sh
 node --test evals/check.test.mjs          # checker against good and bad fixtures
-node plugin/skills/aso/scripts/drift.mjs  # knowledge-base lint
+node cli/aso-kit.mjs drift                # knowledge-base lint
 claude plugin eval plugin --tag trigger --ablation none   # does each skill fire, and stay quiet off-topic
-claude plugin eval plugin --tag quality --ablation none --judge-model sonnet --scaffold --allow-tools Write Edit Bash   # full runs on a fixture app, graded by regex and an LLM judge
+npm link   # quality runs call aso-kit from PATH
+claude plugin eval plugin --eval-dir evals --tag quality --ablation none --judge-model sonnet --scaffold --allow-tools Write Edit Bash   # full runs on a fixture app, graded by regex and an LLM judge
 ```
 
-Quality cases stage `plugin/evals/apps/habitly` (a pre-launch app) or overlay `habitly-live` (en-US live and
+Quality cases live outside the plugin folder, in `evals/`, and stage `evals/apps/habitly` (a pre-launch app) or overlay `habitly-live` (en-US live and
 measured) and run a skill end to end; each costs about $0.50–1.50 a run.

@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const run = (fixture) => {
-  const r = spawnSync("node", [join(here, "../plugin/skills/aso/scripts/check.mjs"), join(here, "fixtures", fixture), "--json"], { encoding: "utf8" });
+  const r = spawnSync("node", [join(here, "../cli/check.mjs"), join(here, "fixtures", fixture), "--json"], { encoding: "utf8" });
   return { code: r.status, findings: JSON.parse(r.stdout) };
 };
 const msgs = (findings) => findings.map((f) => `${f.level} ${f.locale} ${f.field}: ${f.msg}`);
@@ -75,11 +75,11 @@ test("line budgets flag an overlong output file", async () => {
   const dir = mkdtempSync(join(tmpdir(), "aso-"));
   writeFileSync(join(dir, "keywords-de-DE.md"), "x\n".repeat(41));
   writeFileSync(join(dir, "context.md"), "x\n".repeat(10));
-  const r = spawnSync("node", [join(here, "../plugin/skills/aso/scripts/check.mjs"), dir], { encoding: "utf8" });
+  const r = spawnSync("node", [join(here, "../cli/check.mjs"), dir], { encoding: "utf8" });
   assert.equal(r.stdout.trim(), "! keywords-de-DE.md: 41/40 lines");
 });
 
-const dir = (fixture) => spawnSync("node", [join(here, "../plugin/skills/aso/scripts/check.mjs"), join(here, "fixtures", fixture)], { encoding: "utf8" });
+const dir = (fixture) => spawnSync("node", [join(here, "../cli/check.mjs"), join(here, "fixtures", fixture)], { encoding: "utf8" });
 
 test("the changelog flags a locale built on an older primary", () => {
   const r = dir("aso-dir");

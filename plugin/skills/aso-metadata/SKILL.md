@@ -30,19 +30,19 @@ Only for the stores the app is on (or will be).
 Write the locale's entry into `aso/metadata.json` (schema in `conventions.md`; keep other locales), then:
 
 ```
-node ../aso/scripts/check.mjs aso/metadata.json
+aso-kit check aso/metadata.json
 ```
 
 Fix every `✗` and run again until exit 0. Fix a `!` or say in the md why it stays. Never paste copy that fails.
 
-Then a second reader: spawn the `aso-kit:aso-verifier` agent with the locale, this skill's `../aso` path and the `aso/` folder. Fix each FAIL, re-run `check.mjs`, verify again — two rounds at most. A FAIL still standing goes in the md under `## Open` with its quote; it is never dropped silently. The header's `rubric <n>/<n>` is the last verifier round's count, not a count after your own later fixes. For a non-primary locale, copy the verifier's back-translation table into the md as `## Means in English`, so a reader who doesn't speak the language can check the sense. Without the Agent tool, walk `../aso/references/rubric.md` yourself and say so in the md.
+Then a second reader: spawn the `aso-kit:aso-verifier` agent with the locale, this skill's `../aso` path and the `aso/` folder. Fix each FAIL, re-run `aso-kit check`, verify again — two rounds at most. A FAIL still standing goes in the md under `## Open` with its quote; it is never dropped silently. The header's `rubric <n>/<n>` is the last verifier round's count, not a count after your own later fixes. For a non-primary locale, copy the verifier's back-translation table into the md as `## Means in English`, so a reader who doesn't speak the language can check the sense. Without the Agent tool, walk `../aso/references/rubric.md` yourself and say so in the md.
 
 ## 3. Write `aso/metadata-<locale>.md`
 
 Short and paste-ready, at most 60 lines: inside `<details>` each paragraph or bullet is one line, with no blank lines between them; `## Why` at most 3 bullets.
 
 ```markdown
-> aso-metadata · <locale> · YYYY-MM-DD · check.mjs clean · rubric <n>/<items that apply>
+> aso-metadata · <locale> · YYYY-MM-DD · check clean · rubric <n>/<items that apply>
 
 # Metadata — <locale>
 
@@ -80,7 +80,7 @@ If `fastlane/metadata/` exists, offer to write the fields there (gate 3).
 
 Append a row to `aso/changelog.md` (format in `conventions.md`; create it if missing): today, the locale, the stores, the fields that changed, one line on what changed, `Built on` the primary's latest row date for a non-primary locale, status `ready`. Re-running on the same day replaces that day's `ready` row instead of adding one.
 
-Run `node ../aso/scripts/check.mjs aso/` and fix what it flags. Update the state line `Metadata`.
+Run `aso-kit check aso/` and fix what it flags. Update the state line `Metadata`.
 
 ## 4. Screenshot brief — only if wanted
 
@@ -91,12 +91,12 @@ For vitrine-deck, invoke `vitrine-deck:vitrine-deck` with the Skill tool and no 
 ## Console
 
 ```
-aso-metadata · <locale> · check.mjs clean · rubric <n>/<n> · fill name <n>/30, subtitle <n>/30, field <n>/100 · <n> warnings kept
+aso-metadata · <locale> · check clean · rubric <n>/<n> · fill name <n>/30, subtitle <n>/30, field <n>/100 · <n> warnings kept
 → aso/metadata-<locale>.md
 ```
 
 ## Rules
 
 1. Every claim is something the app does. No numbers the developer can't prove.
-2. No competitor or other-store names anywhere (`check.mjs` enforces the ones in `metadata.json`).
+2. No competitor or other-store names anywhere (`aso-kit check` enforces the ones in `metadata.json`).
 3. Description copy reads as written for a person; an LLM summarising it should get the positioning sentence right.

@@ -1,6 +1,6 @@
 ---
 type: regex
 target: {source: file, path: aso/metadata-hi.md}
-pattern: "check\\.mjs clean"
+pattern: "check clean"
 match: contains
 ---

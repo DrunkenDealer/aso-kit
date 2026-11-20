@@ -29,8 +29,8 @@ If the app is live, for each store and the primary storefront:
 
 ```
 mkdir -p aso/snapshots
-node ../aso/scripts/store.mjs lookup ios <id|bundleId> --cc us > aso/snapshots/ios-us.json
-node ../aso/scripts/store.mjs lookup play <package> --cc us --lang en > aso/snapshots/play-us.json
+aso-kit store lookup ios <id|bundleId> --cc us > aso/snapshots/ios-us.json
+aso-kit store lookup play <package> --cc us --lang en > aso/snapshots/play-us.json
 ```
 
 A 404 or empty result means not live in that store — say so, don't guess. Keyword fields and promotional text are never public.
@@ -40,7 +40,7 @@ A 404 or empty result means not live in that store — say so, don't guess. Keyw
 One `AskUserQuestion` round, at most three questions, recommended default first. Typical gaps:
 
 1. **Markets** — default: the languages the app already ships, primary first.
-2. **Competitors** — offer 3–5 from `store.mjs search <store> "<core term>"`, chosen near the app's own size (ratings count within ~10×). Category giants rank on brand, not text; they teach nothing.
+2. **Competitors** — offer 3–5 from `aso-kit store search <store> "<core term>"`, chosen near the app's own size (ratings count within ~10×). Category giants rank on brand, not text; they teach nothing.
 3. **Audience** — only if the README doesn't say.
 
 ## 4. Write `aso/context.md`

@@ -1,6 +1,6 @@
 # Copy rubric
 
-What `check.mjs` can't count. The `aso-verifier` agent answers each item PASS, FAIL or N/A for one locale, quoting the line that decides it. Knowledge files are in `../knowledge/`.
+What `aso-kit check` can't count. The `aso-verifier` agent answers each item PASS, FAIL or N/A for one locale, quoting the line that decides it. Knowledge files are in `../knowledge/`.
 
 | # | Item | PASS when | Rule |
 |---|---|---|---|

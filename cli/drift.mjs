@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 // Lints the knowledge base: every fact bullet carries typed evidence and a verified date, no fact is
 // older than MAX_AGE days, limits.json agrees with the field tables, and files the README lists exist.
-//   node scripts/drift.mjs [--max-age 180]
+//   aso-kit drift [--max-age 180]
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const kb = join(dirname(fileURLToPath(import.meta.url)), "../knowledge");
+const kb = join(dirname(fileURLToPath(import.meta.url)), "../plugin/skills/aso/knowledge");
 const ageArg = process.argv.indexOf("--max-age");
 const maxAge = ageArg > 0 ? Number(process.argv[ageArg + 1]) : 180;
 const TAGS = new Set(["official", "data", "practitioner", "probe"]);

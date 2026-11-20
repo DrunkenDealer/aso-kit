@@ -15,7 +15,7 @@ Store facts and method the aso-kit skills reason from. Skills cite these files; 
 | `endpoints.md` | Unofficial store endpoints, request shapes, probe status |
 | `myths.md` | Contested claims and recycled stats — what not to repeat |
 | `changelog.md` | Store changes 2025–2026, newest first |
-| `limits.json` | Machine copy of field limits and banned tokens for `scripts/check.mjs` |
+| `limits.json` | Machine copy of field limits and banned tokens for `aso-kit check` |
 
 ## Claim format
 
@@ -38,4 +38,4 @@ A claim with only `practitioner` evidence is never stated as a rule — skills s
 
 ## Updating
 
-`/aso-refresh` re-fetches each cited URL, re-runs the probes in `endpoints.md`, and proposes patches with the new date. `../scripts/drift.mjs` fails when a bullet lacks evidence or a date, when `limits.json` disagrees with the tables, or when a claim is older than 180 days.
+`/aso-refresh` re-fetches each cited URL, re-runs the probes in `endpoints.md`, and proposes patches with the new date. `aso-kit drift` fails when a bullet lacks evidence or a date, when `limits.json` disagrees with the tables, or when a claim is older than 180 days.

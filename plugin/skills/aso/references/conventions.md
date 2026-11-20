@@ -11,9 +11,9 @@ One folder, `aso/`, at the project root. No dates in file names; each file opens
 | File | Written by | Holds |
 |---|---|---|
 | `aso/context.md` | `/aso-context` | app, positioning, audience, main feature, screens, markets, competitors, rating, the state block |
-| `aso/snapshots/<store>-<cc>.json` | any skill that fetches a listing | `store.mjs lookup` output, verbatim |
+| `aso/snapshots/<store>-<cc>.json` | any skill that fetches a listing | `aso-kit store lookup` output, verbatim |
 | `aso/keywords-<locale>.md` | `/aso-keywords` | scored targets, clusters, competitor patterns, the packed iOS keyword field |
-| `aso/metadata.json` | `/aso-metadata`, `/aso-localize` | every field, every locale — the file `check.mjs` grades |
+| `aso/metadata.json` | `/aso-metadata`, `/aso-localize` | every field, every locale — the file `aso-kit check` grades |
 | `aso/metadata-<locale>.md` | `/aso-metadata`, `/aso-localize` | paste-ready fields with lengths, the release plan |
 | `aso/screenshot-brief.md` | `/aso-metadata`, on request | the slide brief — format in `screenshot-brief.md` |
 | `aso/audit.md` | `/aso-audit` | scorecard, findings, measurement plan |
@@ -21,7 +21,7 @@ One folder, `aso/`, at the project root. No dates in file names; each file opens
 | `aso/release.md` | `/aso-release` | this release: commits, What's New and Play notes per locale, promotional text proposal |
 | `aso/releases.md` | `/aso-release` appends | one row per release — where the next release's commits start |
 
-Line budgets — short is the point; `node ../aso/scripts/check.mjs aso/` flags a file over its budget:
+Line budgets — short is the point; `aso-kit check aso/` flags a file over its budget:
 
 | File | Lines |
 |---|---|
@@ -35,17 +35,29 @@ First line of every md file:
 > <skill> · <locale or "all"> · YYYY-MM-DD
 ```
 
-## Scripts
+## The aso-kit CLI
 
-All read-only except where noted; all need Node ≥ 18.
+The checker and the store reads ship as a separate CLI, so the plugin carries no code. Before the first command, check it's there:
 
-| Script | Use |
+```sh
+command -v aso-kit || echo "not installed"; node -v
+```
+
+Not installed → ask once, then run on a yes (Node ≥ 18):
+
+```sh
+npm install -g github:DrunkenDealer/aso-kit
+```
+
+On a no, stop: nothing here is graded without it. All commands are read-only.
+
+| Command | Use |
 |---|---|
-| `scripts/store.mjs` | `suggest`, `search`, `lookup`, `top` for both stores; `probe` checks every call |
-| `scripts/check.mjs <metadata.json \| keywords-<locale>.md>` | grades fields, or a keyword plan, against `knowledge/limits.json`. Exit 1 = errors. Never ship with errors |
-| `scripts/check.mjs aso/` | line budgets, and the rows of `changelog.md` and `releases.md` |
-| `scripts/store.mjs match` | whether a store folds two spellings into one word |
-| `scripts/drift.mjs` | lints the knowledge base (`/aso-refresh`) |
+| `aso-kit store` | `suggest`, `search`, `lookup`, `top` for both stores; `probe` checks every call |
+| `aso-kit check <metadata.json \| keywords-<locale>.md>` | grades fields, or a keyword plan, against `knowledge/limits.json`. Exit 1 = errors. Never ship with errors |
+| `aso-kit check aso/` | line budgets, and the rows of `changelog.md` and `releases.md` |
+| `aso-kit store match` | whether a store folds two spellings into one word |
+| `aso-kit drift` | lints the knowledge base (`/aso-refresh`) |
 
 ## Locale and storefront
 
@@ -69,7 +81,7 @@ Copy is keyed by **locale** (`en-US`, `de-DE`, `pt-BR`); store calls by **storef
 
 Optional lists, graded item by item when present: `ios.events` `[{name, short, long}]`, `ios.iaps` `[{name, description}]`, `ios.customProductPages` `[{promotionalText}]`, `play.tags` `["…"]`, `play.promotionalContent` `[{title, description}]`.
 
-A store the app isn't on is omitted. A field left out is not graded. Name, subtitle, Play title and short description warn below 90% of their limit: indexed space left empty is ranking left unclaimed. `competitors` are the names `check.mjs` must never see in the copy.
+A store the app isn't on is omitted. A field left out is not graded. Name, subtitle, Play title and short description warn below 90% of their limit: indexed space left empty is ranking left unclaimed. `competitors` are the names `aso-kit check` must never see in the copy.
 
 ## Changelog
 
@@ -87,7 +99,7 @@ A store the app isn't on is omitted. A field left out is not graded. Name, subti
 - **Result** — filled once the window has passed: iOS ~4 weeks, Play 6–8 weeks after `live` (`knowledge/ranking.md`). Rank of the head term before → after, conversion if known.
 - The primary locale is `en-US` unless the app has no English listing; it is the first locale in the file.
 
-`check.mjs aso/` checks the table: eight cells, ISO dates, a valid status.
+`aso-kit check aso/` checks the table: eight cells, ISO dates, a valid status.
 
 Release notes don't go here: they aren't ranked, so there is nothing to measure, and a row every release would keep resetting the window `/aso-localize` waits on. Promotional text does — it moves conversion.
 
@@ -105,7 +117,7 @@ Release notes don't go here: they aren't ranked, so there is nothing to measure,
 - **Commits** — `<from>..<to>`, short hashes; each row starts where the previous one ended. The first row's `from` may be `—` (from the first commit).
 - **Status** — `ready`, `live YYYY-MM-DD`, or `skipped` (a release with no user-facing change).
 
-`check.mjs aso/` checks six cells, ISO dates, a valid status, and that the ranges chain.
+`aso-kit check aso/` checks six cells, ISO dates, a valid status, and that the ranges chain.
 
 ## State block
 
