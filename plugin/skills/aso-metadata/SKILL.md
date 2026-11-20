@@ -16,6 +16,8 @@ Needs `aso/keywords-<locale>.md`. Without it, offer `/aso-keywords` first; if de
 
 Only for the stores the app is on (or will be).
 
+**Start from the live copy** in `aso/context.md` § Current copy. Show each live name, subtitle, Play title and short description with its count as the baseline above its variants. Keep the brand as the live name spells it. A variant replaces the live text only if it carries a higher-scoring target or more of them; otherwise keep the live text and say why in `## Why`. Not live → write from scratch.
+
 1. **Name / title** — 2–3 variants of `Brand: Head Phrase` (`copy.md`), pick one. iOS name and Play title may differ.
 2. **iOS subtitle, Play short description** — 2–3 variants each, pick one. The subtitle states the value or main use case (`copy.md`); a target term that only fits as a list item goes to the keyword field instead.
 

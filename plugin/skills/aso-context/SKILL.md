@@ -41,6 +41,7 @@ One `AskUserQuestion` round, at most three questions, recommended default first.
 
 1. **Competitors** — offer 3–5 from `aso-kit store search <store> "<core term>"`, chosen near the app's own size (ratings count within ~10×). Category giants rank on brand, not text; they teach nothing.
 2. **Audience** — only if the README doesn't say.
+3. **Live subtitle** — only if the app is on the App Store and neither the snapshot nor fastlane has it.
 
 Never ask about markets, languages or translations. The market is the primary locale only — `en-US` unless the app has no English listing. Other locales are `/aso-localize`'s, run when the developer asks for one.
 
@@ -68,7 +69,7 @@ Never ask about markets, languages or translations. The market is the primary lo
 | App | Store ids | Ratings | Why a peer |
 
 ## Current copy
-<per store: each field with its length, from the snapshot or fastlane; "—" if unknown>
+<per store: each field with its length, from the snapshot or fastlane; "—" if unknown. iOS name and subtitle, Play title and short description are never left "—" for a live app — the later steps build on them>
 
 ## ASO state
 - Context: YYYY-MM-DD

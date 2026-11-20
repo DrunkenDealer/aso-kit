@@ -14,7 +14,7 @@ Needs `aso/context.md`. Without it, read the repo for name, positioning and comp
 
 ## 1. Seed
 
-10–30 terms **in the locale's language**, from the sources in `keyword-method.md` § 1. Never translate English seeds into another locale — write them in that language from its own vocabulary.
+10–30 terms **in the locale's language**, from the sources in `keyword-method.md` § 1, plus every term in the live iOS name and subtitle and Play title and short description (`aso/context.md` § Current copy) — the app may already rank on them. Score them like any other; one is dropped only for a higher scorer, and § Placement says which live terms stay and which go. Never translate English seeds into another locale — write them in that language from its own vocabulary.
 
 ## 2. Expand
 
