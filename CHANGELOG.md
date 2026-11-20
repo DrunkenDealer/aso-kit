@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.0 — 2026-11-20
+
+- The checker and store reads move out of the plugin into the `aso-kit` CLI
+  (`npm install -g github:DrunkenDealer/aso-kit`), so the plugin folder holds only Markdown and JSON, as the plugin
+  directory requires. Skills call `aso-kit check`, `aso-kit store` and `aso-kit drift`, and offer the install the
+  first time.
+- Skills pre-approve only Read, Glob and Grep; Bash and the rest ask as usual.
+- Quality evals and their fixture app move from `plugin/evals/` to `evals/`; run them with `--eval-dir evals`.
+
 ## 1.0.0 — 2026-11-19
 
 - First public release, installed as `aso-kit@mashlab` from the `mashlab` catalog in
