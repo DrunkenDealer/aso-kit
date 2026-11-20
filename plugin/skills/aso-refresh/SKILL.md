@@ -3,7 +3,7 @@ name: aso-refresh
 description: Re-verifies aso-kit's own knowledge base — App Store and Google Play field limits, indexing, policy, endpoints — against the cited official pages and live probes, and proposes dated patches where a fact has drifted. Maintenance, not an ASO step; run it quarterly, after WWDC or Google I/O, or before starting a new app. Triggers on "refresh ASO knowledge", "are the ASO facts still current", "aso-refresh".
 user-invocable: true
 argument-hint: "[knowledge file, default all]"
-allowed-tools: Read, Write, Edit, Glob, Bash, WebFetch, WebSearch, AskUserQuestion
+allowed-tools: Read, Glob, Grep
 ---
 
 # ASO refresh

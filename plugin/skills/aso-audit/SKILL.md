@@ -3,7 +3,7 @@ name: aso-audit
 description: Audits the text of a live App Store or Google Play listing — or a draft in aso/metadata.json — against store limits, policy and keyword placement, checks the rating gate, and returns prioritised fixes plus how to measure them (before/after on iOS, store listing experiments on Play). Text only; screenshots and icons are out of scope. Triggers on "audit my app listing", "ASO audit", "what's wrong with my App Store page", "review my Play Store listing".
 user-invocable: true
 argument-hint: "[app store id | package name | draft]"
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion
+allowed-tools: Read, Glob, Grep
 ---
 
 # ASO audit

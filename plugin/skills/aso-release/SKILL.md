@@ -3,7 +3,7 @@ name: aso-release
 description: Writes the release notes for one app release from the git changes since the last one — App Store What's New and Google Play release notes (in Play Console's <lang> tag format) for every live locale — graded against store limits and policy, and recorded in aso/releases.md. Proposes new App Store promotional text only when the release has a headline feature, and says whether the listing itself needs attention. Never edits listing copy. Triggers on "write release notes", "What's New for this release", "Play Console release notes", "changelog for the store", "aso release".
 user-invocable: true
 argument-hint: "[<from>..<to> | since <date>] [--fastlane]"
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent, AskUserQuestion
+allowed-tools: Read, Glob, Grep
 ---
 
 # ASO release

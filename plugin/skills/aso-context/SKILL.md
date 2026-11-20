@@ -3,7 +3,7 @@ name: aso-context
 description: Captures what every ASO step needs about an app into aso/context.md — what it is, who it's for, its main feature, the screens it has, target markets, competitors its own size, and the live App Store / Google Play listing and rating. Reads the repo first and asks only what the code can't answer. Triggers on "set up ASO for this app", "ASO context", "capture app context for ASO".
 user-invocable: true
 argument-hint: "[app store id | package name]"
-allowed-tools: Read, Write, Glob, Grep, Bash, AskUserQuestion
+allowed-tools: Read, Glob, Grep
 ---
 
 # ASO context

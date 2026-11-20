@@ -3,7 +3,7 @@ name: aso-metadata
 description: Writes the App Store and Google Play text for one locale — app name, subtitle, keyword field, promotional text, description, What's New; Play title, short and full description, release notes — from a scored keyword set, graded by a checker against store limits and policy until it passes. Optionally writes a screenshot brief for /vitrine-deck. Triggers on "write my app store description", "optimize my title and subtitle", "store listing copy", "ASO metadata", "short description for Google Play".
 user-invocable: true
 argument-hint: "[locale, default the primary one]"
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Skill, Agent, AskUserQuestion
+allowed-tools: Read, Glob, Grep
 ---
 
 # ASO metadata

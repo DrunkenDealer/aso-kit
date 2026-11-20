@@ -3,7 +3,7 @@ name: aso
 description: App Store Optimization for the text side of an App Store and Google Play listing — title, subtitle, keyword field, short and full description, promotional text, What's New — from the app's own repo, live store data and a dated knowledge base. Walks context → keywords → metadata → audit with a gate between steps, and can hand a screenshot brief to /vitrine-deck. Triggers on "ASO", "app store optimization", "optimize my app listing", "improve my app store ranking", "where do I start with ASO".
 user-invocable: true
 argument-hint: "[continue | <locale>]"
-allowed-tools: Read, Glob, Grep, Bash, Skill, AskUserQuestion
+allowed-tools: Read, Glob, Grep
 ---
 
 # ASO
