@@ -14,7 +14,7 @@ Needs `aso/context.md`. Without it, read the repo for name, positioning and comp
 
 ## 1. Seed
 
-10–30 terms **in the locale's language**, from the sources in `keyword-method.md` § 1, plus every term in the live iOS name and subtitle and Play title and short description (`aso/context.md` § Current copy) — the app may already rank on them. Score them like any other; one is dropped only for a higher scorer, and § Placement says which live terms stay and which go. Never translate English seeds into another locale — write them in that language from its own vocabulary.
+10–30 terms **in the locale's language**, from the sources in `keyword-method.md` § 1, plus every term in the live iOS name and subtitle and Play title and short description (`aso/context.md` § Current copy) — the app may already rank on them. Score them like any other; one is dropped only for a higher scorer. Never translate English seeds into another locale — write them in that language from its own vocabulary.
 
 ## 2. Expand
 
@@ -47,7 +47,17 @@ Cluster and place per `keyword-method.md` § 4: head term → name / title, seco
 node -e 'console.log([...process.argv[1]].length)' "<field>"
 ```
 
-## 5. Write `aso/keywords-<locale>.md`
+## 5. Judge the live name and subtitle
+
+For a live app, set the live iOS name and subtitle, Play title and short description (`aso/context.md` § Current copy) against the scored targets, per field:
+
+1. **Terms** — each live term with its score: kept, or dropped for which higher scorer.
+2. **Missing** — top-5 targets in no live indexed field (name, subtitle, keyword field if known; Play title, short description).
+3. **Waste** — unused characters below the limit, name words repeated in the subtitle.
+
+End with a one-line verdict per field: keep, or rewrite and why. Not live → skip this step and its section.
+
+## 6. Write `aso/keywords-<locale>.md`
 
 ```markdown
 > aso-keywords · <locale> · YYYY-MM-DD
@@ -67,6 +77,10 @@ node -e 'console.log([...process.argv[1]].length)' "<field>"
 
 ## iOS keyword field (<n>/100 chars)
 `streak,reminder,journal,...`
+
+## Live name & subtitle
+| Field | Live text | Len | Kept | Dropped → for | Missing targets | Verdict |
+| iOS name | Habitly | 7/30 | habitly (brand) | — | habit tracker | rewrite: head term absent, 23 chars unused |
 
 ## Competitors
 | App | Title shape | Phrase they own |

@@ -12,7 +12,7 @@ One folder, `aso/`, at the project root. No dates in file names; each file opens
 |---|---|---|
 | `aso/context.md` | `/aso-context` | app, positioning, audience, main feature, screens, markets, competitors, rating, the state block |
 | `aso/snapshots/<store>-<cc>.json` | any skill that fetches a listing | `aso-kit store lookup` output, verbatim |
-| `aso/keywords-<locale>.md` | `/aso-keywords` | scored targets, clusters, competitor patterns, the packed iOS keyword field |
+| `aso/keywords-<locale>.md` | `/aso-keywords` | scored targets, clusters, the live name and subtitle judged against them, competitor patterns, the packed iOS keyword field |
 | `aso/metadata.json` | `/aso-metadata`, `/aso-localize` | every field, every locale — the file `aso-kit check` grades |
 | `aso/metadata-<locale>.md` | `/aso-metadata`, `/aso-localize` | paste-ready fields with lengths, the release plan |
 | `aso/screenshot-brief.md` | `/aso-metadata` | the slide brief — format in `screenshot-brief.md` |
@@ -26,7 +26,7 @@ Line budgets — short is the point; `aso-kit check aso/` flags a file over its 
 | File | Lines |
 |---|---|
 | `context.md`, `audit.md`, `screenshot-brief.md`, `release.md` | 50 |
-| `keywords-<locale>.md` | 40 |
+| `keywords-<locale>.md` | 50 |
 | `metadata-<locale>.md` | 60 |
 
 First line of every md file:

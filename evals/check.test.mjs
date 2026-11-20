@@ -73,10 +73,10 @@ test("line budgets flag an overlong output file", async () => {
   const { mkdtempSync, writeFileSync } = await import("node:fs");
   const { tmpdir } = await import("node:os");
   const dir = mkdtempSync(join(tmpdir(), "aso-"));
-  writeFileSync(join(dir, "keywords-de-DE.md"), "x\n".repeat(41));
+  writeFileSync(join(dir, "keywords-de-DE.md"), "x\n".repeat(51));
   writeFileSync(join(dir, "context.md"), "x\n".repeat(10));
   const r = spawnSync("node", [join(here, "../cli/check.mjs"), dir], { encoding: "utf8" });
-  assert.equal(r.stdout.trim(), "! keywords-de-DE.md: 41/40 lines");
+  assert.equal(r.stdout.trim(), "! keywords-de-DE.md: 51/50 lines");
 });
 
 const dir = (fixture) => spawnSync("node", [join(here, "../cli/check.mjs"), join(here, "fixtures", fixture)], { encoding: "utf8" });

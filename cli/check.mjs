@@ -14,7 +14,7 @@ if (!file) {
   process.exit(2);
 }
 if (statSync(file).isDirectory()) {
-  const BUDGET = { context: 50, keywords: 40, metadata: 60, audit: 50, release: 50, "screenshot-brief": 50 };
+  const BUDGET = { context: 50, keywords: 50, metadata: 60, audit: 50, release: 50, "screenshot-brief": 50 };
   let over = 0;
   for (const f of readdirSync(file).filter((f) => f.endsWith(".md"))) {
     const max = BUDGET[f.replace(/-[a-z]{2}(-[A-Za-z]+)?\.md$|\.md$/, "")];
