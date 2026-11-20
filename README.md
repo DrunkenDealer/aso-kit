@@ -35,10 +35,10 @@ Then open your app's repo and ask **"Where do I start with ASO?"** (or `/aso-kit
 
 | Skill | Does | Writes |
 |---|---|---|
-| `aso` | walks the steps below with a question between each | nothing |
+| `aso` | runs context → keywords → metadata → audit in one go, no questions between steps | nothing |
 | `aso-context` | app, audience, main feature, screens, markets, peer competitors, live listing and rating | `aso/context.md` |
 | `aso-keywords` | seeds, live autocomplete from both stores, competitor patterns, scored targets, the packed iOS keyword field | `aso/keywords-<locale>.md` |
-| `aso-metadata` | every text field for both stores, graded until clean; optional screenshot brief | `aso/metadata.json`, `aso/metadata-<locale>.md`, `aso/screenshot-brief.md` |
+| `aso-metadata` | every text field for both stores, graded until clean; a screenshot brief | `aso/metadata.json`, `aso/metadata-<locale>.md`, `aso/screenshot-brief.md` |
 | `aso-audit` | text-only audit of a live listing or a draft, fixes by when they can ship, how to measure | `aso/audit.md` |
 | `aso-localize` | one more market, later and on request: native keyword research, meaning checked against English, native review gate | per-locale files |
 | `aso-release` | release notes from the commits since the last release: What's New and Play notes per live locale, promotional text when there's news, a listing verdict | `aso/release.md`, `aso/releases.md` |
@@ -48,8 +48,8 @@ Output lives in one `aso/` folder in your repo; `aso/changelog.md` and `aso/rele
 
 ## Screenshots
 
-Out of scope on purpose. `aso-metadata` can write `aso/screenshot-brief.md` — the main feature, the screens worth
-showing, and the headline for each slide — and hand it to
+Out of scope on purpose. `aso-metadata` writes `aso/screenshot-brief.md` — the main feature, the screens worth
+showing, and the headline for each slide — for
 [Vitrine Deck](https://github.com/DrunkenDealer/claude-code-vitrine-deck), which builds the screenshots from it.
 The brief works for any designer too.
 

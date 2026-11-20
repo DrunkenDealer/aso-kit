@@ -1,6 +1,6 @@
 ---
 name: aso-metadata
-description: Writes the App Store and Google Play text for one locale — app name, subtitle, keyword field, promotional text, description, What's New; Play title, short and full description, release notes — from a scored keyword set, graded by a checker against store limits and policy until it passes. Optionally writes a screenshot brief for /vitrine-deck. Triggers on "write my app store description", "optimize my title and subtitle", "store listing copy", "ASO metadata", "short description for Google Play".
+description: Writes the App Store and Google Play text for one locale — app name, subtitle, keyword field, promotional text, description, What's New; Play title, short and full description, release notes — from a scored keyword set, graded by a checker against store limits and policy until it passes. Also writes a screenshot brief for /vitrine-deck. Triggers on "write my app store description", "optimize my title and subtitle", "store listing copy", "ASO metadata", "short description for Google Play".
 user-invocable: true
 argument-hint: "[locale, default the primary one]"
 allowed-tools: Read, Glob, Grep
@@ -8,7 +8,7 @@ allowed-tools: Read, Glob, Grep
 
 # ASO metadata
 
-Writes `aso/metadata.json` (this locale's entry), `aso/metadata-<locale>.md`, and on request `aso/screenshot-brief.md`. How to write each field: `../aso/knowledge/copy.md`. What gets rejected: `../aso/knowledge/policy.md`. How to fit more into each character: `../aso/knowledge/length-and-packing.md`. Paths, gates, console: `../aso/references/conventions.md`. Bare knowledge file names (`copy.md`, `limits.json`…) are in `../aso/knowledge/`.
+Writes `aso/metadata.json` (this locale's entry), `aso/metadata-<locale>.md`, and `aso/screenshot-brief.md`. How to write each field: `../aso/knowledge/copy.md`. What gets rejected: `../aso/knowledge/policy.md`. How to fit more into each character: `../aso/knowledge/length-and-packing.md`. Paths, gates, console: `../aso/references/conventions.md`. Bare knowledge file names (`copy.md`, `limits.json`…) are in `../aso/knowledge/`.
 
 Needs `aso/keywords-<locale>.md`. Without it, offer `/aso-keywords` first; if declined, work from the repo and say the copy isn't keyword-targeted.
 
@@ -84,11 +84,11 @@ Append a row to `aso/changelog.md` (format in `conventions.md`; create it if mis
 
 Run `aso-kit check aso/` and fix what it flags. Update the state line `Metadata`.
 
-## 4. Screenshot brief — only if wanted
+## 4. Screenshot brief
 
-Ask once: "Write a screenshot brief?" with **Yes, and open /vitrine-deck** · Yes, brief only · No. On yes, write `aso/screenshot-brief.md` in the format of `../aso/references/screenshot-brief.md`: screens from `aso/context.md`, captions that echo this locale's targets, slides 1–3 carrying the pitch. Update the state line `Screenshot brief`.
+Write `aso/screenshot-brief.md`, without asking, in the format of `../aso/references/screenshot-brief.md`: screens from `aso/context.md`, captions that echo this locale's targets, slides 1–3 carrying the pitch. Update the state line `Screenshot brief`.
 
-For vitrine-deck, invoke `vitrine-deck:vitrine-deck` with the Skill tool and no argument (its argument is a screenshots folder); it reads `aso/screenshot-brief.md` itself. If it isn't installed, say: the brief works for any designer, and vitrine-deck is at https://github.com/DrunkenDealer/claude-code-vitrine-deck.
+Don't run `/vitrine-deck` — it reads `aso/screenshot-brief.md` itself when the developer runs it. The brief works for any designer too.
 
 ## Console
 
