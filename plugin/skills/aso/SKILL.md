@@ -34,7 +34,7 @@ Screenshots are not a step. `/aso-metadata` offers a brief; `/vitrine-deck` buil
 4. **Done:**
    ```
    aso · <app> · text ASO done for <primary locale>
-   Ship it, mark it live in aso/changelog.md, and measure (~4 weeks iOS, 6–8 Play) · then /aso-localize for one more market, if wanted
+   Ship it, mark it live in aso/changelog.md, and measure (~4 weeks iOS, 6–8 Play)
    ```
 
 `$ARGUMENTS`: `continue` skips step 1's printout and runs the next step's gate; a locale scopes steps 2–3 to it.
